@@ -2,12 +2,12 @@
 
 import { useLogin } from "@/features/auth/hooks/useLogin";
 import { Button } from "@/components/ui/button";
-import { LOGIN_FORM_FIELDS } from "../../configs/login-form.config";
+import { LOGIN_FORM_FIELDS } from "../configs/login-form.config";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
-export default function LoginForm() {
+const LoginForm = () => {
     const { formAction, state, isPending } = useLogin();
 
     return (
@@ -59,3 +59,5 @@ export default function LoginForm() {
         </Card>
     )
 }
+
+export default LoginForm;
