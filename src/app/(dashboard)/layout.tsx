@@ -1,29 +1,23 @@
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
-import DashboardSidebar from "./_components/dashboard-sidebar";
 import {
   SidebarInset,
   SidebarProvider,
-} from '@/components/ui/sidebar'
-import { Role } from '@/generated/prisma';
-
+} from '@/components/ui/sidebar';
+import DashboardSidebar from './_components/dashboard-sidebar';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
 
   if (!session?.user) redirect('/login');
-
-  if (session.user.role === Role.CASHIER) redirect('/pos');
+  
+  const sidebarStyles = {
+    "--sidebar-width": "var(--sidebar-width-expanded)",
+    "--header-height": "var(--header-height)",
+  } as React.CSSProperties;
 
   return (
-    <SidebarProvider
-      style={
-        {
-          "--sidebar-width": "var(--sidebar-width-expanded)",
-          "--header-height": "var(--header-height)",
-        } as React.CSSProperties
-      }
-    >
+    <SidebarProvider style={sidebarStyles}>
       <DashboardSidebar user={session.user} />
       <SidebarInset>
         {children}

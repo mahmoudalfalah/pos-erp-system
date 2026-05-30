@@ -10,12 +10,12 @@ import {
   Settings,
 } from "lucide-react";
 import { Role } from "@/generated/prisma";
-import type { SidebarConfigs } from "../_types/sidebar.types";
+import type { DashboardSidebarConfigs } from "../_types/dashboard-sidebar.types";
 
 
 
 
-export const SIDEBAR_CONFIGS: SidebarConfigs = {
+export const SIDEBAR_CONFIGS: DashboardSidebarConfigs = {
   navMain: [
     {
       title: "Dashboard",
