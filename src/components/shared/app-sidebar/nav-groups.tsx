@@ -8,13 +8,13 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
-import type { NavGroup } from "../_types/sidebar.types";
+import type { NavGroup } from "./app-sidebar.types";
 
 const NavGroups = ({ groups }: { groups: NavGroup[] }) => {
   return (
     <>
       {groups.map((group) => (
-        <SidebarGroup key={group.label} className="group-data-[collapsible=icon]:hidden">
+        <SidebarGroup key={group.label}>
           <SidebarGroupLabel>{group.label}</SidebarGroupLabel>
           <SidebarMenu className="flex flex-col gap-2">
             {group.items.map((item) => (

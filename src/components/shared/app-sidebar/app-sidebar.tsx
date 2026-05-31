@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import type { SessionUser } from "@/features/auth/types/auth.types";
 import type { SidebarConfigs } from "./app-sidebar.types";
+import Link from "next/link";
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & { user: SessionUser, configs: SidebarConfigs };
 
@@ -22,7 +23,7 @@ const AppSidebar = ({ user, configs, ...props }: AppSidebarProps) => {
  
 
   return (
-    <Sidebar collapsible="icon" {...props}>
+    <Sidebar {...props}>
       <SidebarHeader>
       <SidebarMenu>
           <SidebarMenuItem>
@@ -31,7 +32,7 @@ const AppSidebar = ({ user, configs, ...props }: AppSidebarProps) => {
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <a href="#">
+              <Link href="#">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <MonitorPlay className="size-4" />
                 </div>
@@ -39,7 +40,7 @@ const AppSidebar = ({ user, configs, ...props }: AppSidebarProps) => {
                   <span className="truncate font-semibold">POS System</span>
                   <span className="truncate text-xs">Control Panel</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
