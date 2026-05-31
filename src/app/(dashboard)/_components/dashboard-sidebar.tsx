@@ -40,7 +40,7 @@ const DashboardSidebar = ({ user }: { user: SessionUser }) => {
     }, [user]);
 
     return (
-        <AppSidebar user={user} configs={filteredConfigs} />
+        <AppSidebar user={user} configs={filteredConfigs} variant="inset" />
     );
 }
 
