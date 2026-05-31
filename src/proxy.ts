@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 import { ROLE_REDIRECTS, PUBLIC_ROUTES, DEFAULT_LOGIN } from "@/lib/constants/paths";
+import { Role } from "@/generated/prisma";
 
 export const proxy = auth((req) => {
     const { nextUrl } = req;
@@ -13,12 +14,19 @@ export const proxy = auth((req) => {
         return NextResponse.redirect(new URL(DEFAULT_LOGIN, req.url));
     }
 
-    if (session && nextUrl.pathname === DEFAULT_LOGIN) {
+
+    if (session) {
         const role = session.user.role;
+        
+        if (nextUrl.pathname === DEFAULT_LOGIN) {    
+            const redirect = ROLE_REDIRECTS[role] ?? "/";
+            return NextResponse.redirect(new URL(redirect, req.url));
+        }
 
-        const redirect = ROLE_REDIRECTS[role] ?? "/";
+        if (nextUrl.pathname.startsWith("/dashboard") && role === Role.CASHIER) {
+            return NextResponse.redirect(new URL("/pos", req.url));
+        }
 
-        return NextResponse.redirect(new URL(redirect, req.url));
     }
 
     return NextResponse.next();
