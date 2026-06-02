@@ -23,21 +23,19 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Initialize Next.js Build Cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
       - name: Deterministic Dependency Installation
         run: npm ci
 
       - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Initialize Next.js Build Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.[jt]s', '**/*.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+        run: npx prisma generate --schema=prisma/schema.prisma
 
       - name: Execute Strict Linting
         run: npm run lint
