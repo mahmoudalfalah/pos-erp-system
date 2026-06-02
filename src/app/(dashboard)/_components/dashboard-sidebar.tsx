@@ -22,7 +22,7 @@ const DashboardSidebar = ({ user }: { user: SessionUser }) => {
         const filteredNavMain = SIDEBAR_CONFIGS.navMain.filter((item) =>
             item.roles.includes(user.role)
         )
-        .map(({ roles, ...item }) => item);
+        .map(({ roles: _, ...item }) => item);
     
         const filteredGroups = SIDEBAR_CONFIGS.navGroups
         .map((group) => ({
@@ -30,14 +30,14 @@ const DashboardSidebar = ({ user }: { user: SessionUser }) => {
             items: group.items.filter((item) => item.roles.includes(user.role)),
         }))
         .filter((group) => group.items.length > 0)
-        .map(({label, items}) => ({label, items: items.map(({roles, ...item}) => item)}));
+        .map(({label, items}) => ({label, items: items.map(({roles: _, ...item}) => item)}));
 
         return {
             navMain: filteredNavMain,
             navGroups: filteredGroups
         }
 
-    }, [user]);
+    }, [user.role]);
 
     return (
         <AppSidebar user={user} configs={filteredConfigs} variant="inset" />
