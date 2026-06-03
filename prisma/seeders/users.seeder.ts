@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/features/auth/types/role.types";
 import { db } from "@/lib/db";
 
 const SEED_USERS = [
