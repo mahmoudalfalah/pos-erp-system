@@ -1,4 +1,4 @@
-import { Role } from "@/generated/prisma";
+import { Role } from "@/features/auth/types/role.types"
 import type { NavItem } from "@/components/shared/app-sidebar";
 
 export type DashboardNavItem = NavItem & { 

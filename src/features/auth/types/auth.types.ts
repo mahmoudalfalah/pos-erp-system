@@ -1,4 +1,4 @@
-import type { Role } from "@/generated/prisma";
+import type { Role } from "@/features/auth/types/role.types"
 
 export type LoginActionState = {
     error?: string;

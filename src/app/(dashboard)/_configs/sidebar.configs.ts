@@ -9,7 +9,7 @@ import {
   Users,
   Settings,
 } from "lucide-react";
-import { Role } from "@/generated/prisma";
+import { Role } from "@/features/auth/types/role.types"
 import type { DashboardSidebarConfigs } from "../_types/dashboard-sidebar.types";
 
 
