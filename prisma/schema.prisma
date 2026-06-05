@@ -7,6 +7,10 @@ datasource db {
   provider = "postgresql"
 }
 
+// =============================================
+// User Domain
+// =============================================
+
 enum Role {
   ADMIN
   MANAGER
@@ -14,15 +18,135 @@ enum Role {
 }
 
 model User {
-  id           String    @id @default(uuid())
-  email        String    @unique
+  id           String          @id @default(uuid())
+  email        String          @unique
   name         String
-  passwordHash String    @map("password_hash")
+  passwordHash String          @map("password_hash")
   role         Role
-  isActive     Boolean   @default(true) @map("is_active")
-  createdAt    DateTime  @default(now()) @map("created_at")
-  updatedAt    DateTime  @updatedAt @map("updated_at")
-  lastLoginAt  DateTime? @map("last_login_at")
+  isActive     Boolean         @default(true) @map("is_active")
+  createdAt    DateTime        @default(now()) @map("created_at")
+  updatedAt    DateTime        @updatedAt @map("updated_at")
+  lastLoginAt  DateTime?       @map("last_login_at")
+
+  stockMovements StockMovement[]
 
   @@map("users")
+}
+
+// =============================================
+// Category Domain
+// =============================================
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  products    Product[]
+
+  @@index([isActive])
+  @@map("categories")
+}
+
+// =============================================
+// Brand Domain
+// =============================================
+
+model Brand {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  isActive    Boolean   @default(true) @map("is_active")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
+
+  products    Product[]
+
+  @@index([isActive])
+  @@map("brands")
+}
+
+// =============================================
+// Product Domain
+// =============================================
+
+model Product {
+  id           String    @id @default(cuid())
+  name         String
+  slug         String    @unique
+  sku          String    @unique
+  barcode      String?   @unique
+  description  String?
+  
+  currentPrice Int       @map("current_price")
+  currentCost  Int       @map("current_cost")
+  
+  isActive     Boolean   @default(true) @map("is_active")
+  
+  categoryId   String    @map("category_id")
+  brandId      String    @map("brand_id")
+  
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
+  deletedAt    DateTime? @map("deleted_at")
+
+  category       Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  brand          Brand           @relation(fields: [brandId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  stockMovements StockMovement[]
+
+  @@index([categoryId])
+  @@index([brandId])
+  @@index([isActive])
+  @@index([sku])
+  @@index([barcode])
+  @@map("products")
+}
+
+// =============================================
+// Inventory Ledger Domain
+// =============================================
+
+enum StockMovementType {
+  INCOMING
+  OUTGOING
+  ADJUSTMENT
+  RETURN
+  DAMAGED
+}
+
+model StockMovement {
+  id            String            @id @default(cuid())
+  
+  productId     String            @map("product_id")
+  product       Product           @relation(fields: [productId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  
+  type          StockMovementType
+  quantity      Int
+  previousStock Int               @map("previous_stock")
+  newStock      Int               @map("new_stock")
+  
+  snapshotPrice Int               @map("snapshot_price")
+  snapshotCost  Int               @map("snapshot_cost")
+  
+  referenceId   String?           @map("reference_id")
+  reason        String?
+  notes         String?
+  
+  performedById String?           @map("performed_by_id")
+  performedBy   User?             @relation(fields: [performedById], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  
+  createdAt     DateTime          @default(now()) @map("created_at")
+  
+  @@index([productId])
+  @@index([type])
+  @@index([createdAt])
+  @@index([referenceId])
+  @@map("stock_movements")
 }
