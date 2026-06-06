@@ -1,0 +1,40 @@
+name: Branch & Commit Compliance
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  branch-name:
+    name: Branch Naming Convention
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate branch name
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          PATTERN="^(feat|fix|hotfix|chore|refactor|ci|docs|test|perf)(\/[0-9]+-[a-z0-9-]+|\/[a-z0-9-]+)$"
+          if [[ ! "$BRANCH" =~ $PATTERN ]]; then
+            echo "Branch name '$BRANCH' does not follow convention. Expected: type/123-simple-description or type/simple-description"
+            exit 1
+          fi
+
+  commit-messages:
+    name: Commit Message Convention
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate commit messages
+        run: |
+          PATTERN="^(feat|fix|hotfix|chore|refactor|ci|docs|test|perf)(\([a-z0-9-]+\))?: .{1,50}$"
+          COMMITS=$(git log origin/main..HEAD --pretty=format:"%s")
+          while IFS= read -r COMMIT; do
+            if [[ ! "$COMMIT" =~ $PATTERN ]]; then
+              echo "Commit message '$COMMIT' does not follow convention. Expected: type(scope): description"
+              exit 1
+            fi
+          done <<< "$COMMITS"
