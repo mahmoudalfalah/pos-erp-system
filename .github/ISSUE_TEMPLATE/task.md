@@ -1,3 +1,10 @@
+---
+name: Standard Task
+about: Create a new task, feature, or bug report
+title: 'type(scope): '
+labels: ''
+assignees: 'mahmoudalfalah'
+---
 <!-- 
   Thank you for opening an issue! 
   Please follow the title convention: type(scope): description 
