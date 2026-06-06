@@ -1,0 +1,19 @@
+name: PR Title Compliance
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  pr-title:
+    name: PR Title Convention
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        run: |
+          TITLE="${{ github.event.pull_request.title }}"
+          PATTERN="^(feat|fix|hotfix|chore|refactor|ci|docs|test|perf)(\([a-z0-9-]+\))?: .{1,50}$"
+          if [[ ! "$TITLE" =~ $PATTERN ]]; then
+            echo "PR title '$TITLE' does not follow convention. Expected: type(scope): description"
+            exit 1
+          fi
