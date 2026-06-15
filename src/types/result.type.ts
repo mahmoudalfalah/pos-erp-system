@@ -11,4 +11,4 @@ export type Result<T = void> =
     | { success: false; error: AppError };
 
 export const ok = <T>(data: T): Result<T> => ({ success: true, data });
-export const fail = (error: AppError): Result => ({ success: false, error });
+export const fail = (error: AppError): Result<never> => ({ success: false, error });
