@@ -43,6 +43,9 @@ jobs:
       - name: Execute Type Check
         run: npx tsc --noEmit
 
+      - name: Execute Unit Tests
+        run: npm run test
+
       - name: Execute Production Build
         env:
           NEXT_TELEMETRY_DISABLED: 1

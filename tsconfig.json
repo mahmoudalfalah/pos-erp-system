@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/generated/prisma": ["./src/generated/prisma/client"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": [
     "next-env.d.ts",
