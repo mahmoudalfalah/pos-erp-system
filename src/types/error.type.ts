@@ -11,6 +11,10 @@ export type ProductErrorCode =
   | "PRODUCT_OUT_OF_STOCK"
   | "PRODUCT_INSUFFICIENT_STOCK";
 
+export type CategoryErrorCode = 
+  | "CATEGORY_NOT_FOUND"
+  | "CATEGORY_ALREADY_EXISTS";
+
 // --- General ---
 export type GeneralErrorCode =
   | "VALIDATION"
@@ -21,4 +25,5 @@ export type GeneralErrorCode =
 export type AppErrorCode =
   | AuthErrorCode
   | ProductErrorCode
+  | CategoryErrorCode
   | GeneralErrorCode;
