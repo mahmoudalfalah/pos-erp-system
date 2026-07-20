@@ -80,3 +80,30 @@ type(scope): description
 Example: `chore(infrastructure): establish CONTRIBUTING.md for Git workflow`
 
 > **Convention only** — not enforced by CI.
+
+---
+
+## Testing: Shared Prisma Mock
+
+Tests that need a mocked Prisma client should **not** create their own `mockDeep<PrismaClient>()` instance or call `vi.mock("@/lib/db", ...)` locally. A single shared mock is already wired up globally:
+
+- `src/tests/mocks/db.ts` exports the shared instance: `mockPrisma: DeepMockProxy<PrismaClient>`.
+- `src/tests/setup.ts` registers `vi.mock("@/lib/db", ...)` once and resets `mockPrisma` in a global `beforeEach`.
+- `vitest.config.ts` loads `src/tests/setup.ts` via `test.setupFiles`, so this is active before any test file runs.
+
+**In a new test file, just import the mock and set return values:**
+
+```typescript
+import { mockPrisma } from "@/tests/mocks/db";
+
+mockPrisma.category.create.mockResolvedValue(fakeDbResponse);
+```
+
+Do not:
+- Redefine `mockDeep<PrismaClient>()` in a test file
+- Call `vi.mock("@/lib/db", ...)` outside of `src/tests/setup.ts`
+- Call `mockReset` yourself — it already runs globally before every test
+
+> **Note:** the shared mock must be named starting with `mock` (e.g. `mockPrisma`, not `prismaMock`). Vitest's hoisting of `vi.mock()` factories only allows referencing out-of-scope variables prefixed with `mock` — a differently-named variable will throw a hoisting/initialization error.
+
+> **Convention only** — not enforced by CI.
