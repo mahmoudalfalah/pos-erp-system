@@ -32,7 +32,17 @@ jobs:
         run: |
           PATTERN="^(feat|fix|hotfix|chore|refactor|ci|docs|test|perf)(\([a-z0-9-]+\))?: .{1,100}$"
           COMMITS=$(git log origin/main..HEAD --pretty=format:"%s")
-          while IFS= read -r COMMIT; do
+          if [[ -z "$COMMITS" ]]: then
+            echo "No commits found to validate."
+            exit 0
+          fi
+
+          while IFS= read -r COMMIT || [[ -n "$COMMIT" ]]; do
+
+            if [[ -z "$COMMIT" ]]; then
+              continue
+            fi
+
             if [[ ! "$COMMIT" =~ $PATTERN ]]; then
               echo "Commit message '$COMMIT' does not follow convention. Expected: type(scope): description"
               exit 1
