@@ -1,8 +1,10 @@
 // --- Auth ---
 export type AuthErrorCode =
   | "AUTH_UNAUTHORIZED"
+  | "AUTH_UNAUTHENTICATED"
   | "AUTH_FORBIDDEN"
   | "AUTH_USER_ALREADY_EXISTS"
+  | "ACCOUNT_DISABLED"
   | "AUTH_INVALID_CREDENTIALS";
 
 // --- Products ---
