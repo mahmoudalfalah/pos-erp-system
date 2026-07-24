@@ -11,3 +11,5 @@ export type SessionUser = {
     avatar?: string;
     role: Role;
 }
+
+export type AuthorizedUser = Pick<SessionUser, "id" | "role">;
