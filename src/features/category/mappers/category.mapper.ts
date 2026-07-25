@@ -1,6 +1,6 @@
 import type { Category as PrismaCategory } from "@/generated/prisma";
 import type { Category } from "../types/category.type";
-import type { CategoryDTO } from "../dtos/category.dto";
+import type { CategoryDto } from "../dtos/category.dto";
 
 export const CategoryMapper = {
     toDomain(raw: PrismaCategory): Category {
@@ -14,7 +14,7 @@ export const CategoryMapper = {
             updatedAt: raw.updatedAt,
         };
     },
-    toDto(domain: Category): CategoryDTO {
+    toDto(domain: Category): CategoryDto {
         return {
             ...domain,
             createdAt: domain.createdAt.toISOString(),
