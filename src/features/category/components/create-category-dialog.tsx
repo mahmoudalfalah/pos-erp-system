@@ -24,7 +24,7 @@ import { useCreateCategoryDialog } from "../hooks/use-create-category-dialog";
 import { CREATE_CATEGORY_REGISTERED_FIELDS } from "../configs/create-category-form.configs";
 import { Spinner } from "@/components/ui/spinner";
 
-export function CreateCategoryDialog() {
+export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
   const { open, handleOpenChange, onSubmit, form, errors, isSubmitting } =
     useCreateCategoryDialog();
 
@@ -35,7 +35,7 @@ export function CreateCategoryDialog() {
       </DialogTrigger>
       <DialogContent className="sm:max-w-sm">
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit((data) => onSubmit(data, onCreated))}
           className="flex flex-col gap-4"
           noValidate
         >

@@ -1,9 +1,5 @@
-import { CreateCategoryDialog } from "@/features/category/components/create-category-dialog";
+import { CategoriesManagement } from "@/features/category/components/categories-management";
 
-const CategoriesPage = () => {
-  return (
-    <CreateCategoryDialog />
-  )
+export default async function CategoriesPage() {
+  return <CategoriesManagement />
 }
-
-export default CategoriesPage

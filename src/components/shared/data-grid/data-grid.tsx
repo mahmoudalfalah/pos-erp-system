@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { 
     AllCommunityModule,
     themeQuartz,
-    colorSchemeDark
+    colorSchemeDark,
 } from 'ag-grid-community';
 import { AgGridProvider } from 'ag-grid-react';
 import { AgGridReact } from 'ag-grid-react';
@@ -25,7 +25,8 @@ export function DataGrid<TData>({
     pageSize = 10,
     pageSizeOptions = [10, 20, 50],
     initialPage=1,
-    onPaginationChange
+    onPaginationChange,
+    onReady
 }: DataGridProps<TData>) {
     const isGridReady = useRef(false);
 
@@ -48,6 +49,7 @@ export function DataGrid<TData>({
                     onGridReady={(event) => {
                         event.api.paginationGoToPage(initialPage - 1);
                         isGridReady.current = true;
+                        onReady?.(event.api);
                     }}
                     onPaginationChanged={(event) => {
                         if (!isGridReady.current) return;

@@ -2,7 +2,8 @@ import type {
     ColDef,
     GetRowIdFunc,
     IDatasource,
-    RowSelectionOptions
+    RowSelectionOptions,
+    GridApi
 } from "ag-grid-community";
 
 export type DataGridProps<TData> = {
@@ -14,5 +15,6 @@ export type DataGridProps<TData> = {
     pageSize?: number;
     pageSizeOptions?: number[];
     initialPage?: number;
-    onPaginationChange?: (page: number, perPage: number) => void
+    onPaginationChange?: (page: number, perPage: number) => void;
+    onReady?: (api: GridApi) => void
 }
