@@ -30,7 +30,7 @@ export const useCreateCategoryDialog = () => {
     }
   };
 
-  const onSubmit = async (data: CreateCategoryInput) => {
+  const onSubmit = async (data: CreateCategoryInput, onCreated: () => void) => {
     form.clearErrors("root");
     try {
       const result = await createCategoryAction(data);
@@ -43,6 +43,7 @@ export const useCreateCategoryDialog = () => {
         return;
       }
       toast.success("Category created successfully!");
+      onCreated();
       handleOpenChange(false);
     } catch (error) {
       console.error("Error creating category:", error);
