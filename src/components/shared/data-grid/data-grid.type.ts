@@ -1,3 +1,4 @@
+import type { Ref } from "react";
 import type {
     ColDef,
     GetRowIdFunc,
@@ -5,6 +6,11 @@ import type {
     RowSelectionOptions,
     GridApi
 } from "ag-grid-community";
+
+export type DataGridHandle<TData> = {
+    getSelectedRows: () => TData[];
+    clearSelection: () => void;
+}
 
 export type DataGridProps<TData> = {
     columnDefs: ColDef<TData>[];
@@ -16,5 +22,6 @@ export type DataGridProps<TData> = {
     pageSizeOptions?: number[];
     initialPage?: number;
     onPaginationChange?: (page: number, perPage: number) => void;
-    onReady?: (api: GridApi) => void
+    onReady?: (api: GridApi<TData>) => void,
+    ref?: Ref<DataGridHandle<TData>>;
 }
