@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useImperativeHandle } from 'react';
 import { 
     AllCommunityModule,
     themeQuartz,
     colorSchemeDark,
+    type GridApi
 } from 'ag-grid-community';
 import { AgGridProvider } from 'ag-grid-react';
 import { AgGridReact } from 'ag-grid-react';
@@ -26,9 +27,17 @@ export function DataGrid<TData>({
     pageSizeOptions = [10, 20, 50],
     initialPage=1,
     onPaginationChange,
-    onReady
+    onReady,
+    ref
 }: DataGridProps<TData>) {
     const isGridReady = useRef(false);
+    const gridApiRef = useRef<GridApi<TData> | null>(null);
+
+    
+    useImperativeHandle(ref, () => ({
+        getSelectedRows: () => gridApiRef.current?.getSelectedRows() || [],
+        clearSelection: () => gridApiRef.current?.deselectAll(),
+    }), []);
 
     return (
         <AgGridProvider modules={modules}>
@@ -49,6 +58,7 @@ export function DataGrid<TData>({
                     onGridReady={(event) => {
                         event.api.paginationGoToPage(initialPage - 1);
                         isGridReady.current = true;
+                        gridApiRef.current = event.api;
                         onReady?.(event.api);
                     }}
                     onPaginationChanged={(event) => {
