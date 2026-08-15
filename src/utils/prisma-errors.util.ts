@@ -12,3 +12,7 @@ export const getPrismaUniqueFields = (error: unknown): string[] | null => {
 
     return null;
 };
+
+export const isPrismaRecordNotFound = (error: unknown): boolean => {
+    return error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025';
+};
