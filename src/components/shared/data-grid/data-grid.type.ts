@@ -23,5 +23,6 @@ export type DataGridProps<TData> = {
     initialPage?: number;
     onPaginationChange?: (page: number, perPage: number) => void;
     onReady?: (api: GridApi<TData>) => void,
+    onHasSelectedRowsChange?: (hasSelectedRows: boolean) => void 
     ref?: Ref<DataGridHandle<TData>>;
 }
