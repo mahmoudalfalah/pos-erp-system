@@ -28,6 +28,7 @@ export function DataGrid<TData>({
     initialPage=1,
     onPaginationChange,
     onReady,
+    onHasSelectedRowsChange,
     ref
 }: DataGridProps<TData>) {
     const isGridReady = useRef(false);
@@ -67,6 +68,11 @@ export function DataGrid<TData>({
                             event.api.paginationGetCurrentPage() + 1,
                             event.api.paginationGetPageSize()
                         )
+                    }}
+                    onSelectionChanged={(event) => {
+                        onHasSelectedRowsChange?.(
+                            event.api.getSelectedRows().length > 0
+                        );
                     }}
                 />
             </div>
