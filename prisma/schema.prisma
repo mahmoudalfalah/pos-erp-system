@@ -91,14 +91,14 @@ model Product {
   isActive     Boolean   @default(true) @map("is_active")
   
   categoryId   String    @map("category_id")
-  brandId      String    @map("brand_id")
+  brandId      String?   @map("brand_id")
   
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
   deletedAt    DateTime? @map("deleted_at")
 
   category       Category        @relation(fields: [categoryId], references: [id], onDelete: Restrict, onUpdate: Cascade)
-  brand          Brand           @relation(fields: [brandId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  brand          Brand?          @relation(fields: [brandId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   stockMovements StockMovement[]
 
   @@index([categoryId])
