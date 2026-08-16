@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "products" ALTER COLUMN "brand_id" DROP NOT NULL;
