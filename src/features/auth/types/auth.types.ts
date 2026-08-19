@@ -1,15 +1,15 @@
 import type { Role } from '@/features/auth/types/role.types';
 
 export type LoginActionState = {
-  error?: string;
+    error?: string;
 };
 
 export type SessionUser = {
-  id: string;
-  name: string;
-  email: string;
-  avatar?: string;
-  role: Role;
+    id: string;
+    name: string;
+    email: string;
+    avatar?: string;
+    role: Role;
 };
 
 export type AuthorizedUser = Pick<SessionUser, 'id' | 'role'>;

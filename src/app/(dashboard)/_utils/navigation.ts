@@ -3,36 +3,36 @@ import type { NavItem } from '@/components/shared/app-sidebar';
 import type { Role } from '@/features/auth';
 
 const filterAndStripRoles = (items: DashboardNavItem[], userRole: Role): NavItem[] => {
-  const processedItems: NavItem[] = [];
+    const processedItems: NavItem[] = [];
 
-  for (const item of items) {
-    if (item.roles.includes(userRole)) {
-      const { roles: _, ...safeItem } = item;
-      processedItems.push(safeItem);
+    for (const item of items) {
+        if (item.roles.includes(userRole)) {
+            const { roles: _, ...safeItem } = item;
+            processedItems.push(safeItem);
+        }
     }
-  }
 
-  return processedItems;
+    return processedItems;
 };
 
 export const getFilteredConfigs = ({ userRole, configs }: FilterSidebarParams) => {
-  const navMain = filterAndStripRoles(configs.navMain, userRole);
+    const navMain = filterAndStripRoles(configs.navMain, userRole);
 
-  const navGroups = [];
+    const navGroups = [];
 
-  for (const group of configs.navGroups) {
-    const filteredItems = filterAndStripRoles(group.items, userRole);
+    for (const group of configs.navGroups) {
+        const filteredItems = filterAndStripRoles(group.items, userRole);
 
-    if (filteredItems.length > 0) {
-      navGroups.push({
-        label: group.label,
-        items: filteredItems,
-      });
+        if (filteredItems.length > 0) {
+            navGroups.push({
+                label: group.label,
+                items: filteredItems,
+            });
+        }
     }
-  }
 
-  return {
-    navMain,
-    navGroups,
-  };
+    return {
+        navMain,
+        navGroups,
+    };
 };

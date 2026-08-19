@@ -2,9 +2,9 @@ import { mockReset } from 'vitest-mock-extended';
 import { mockPrisma } from '@/tests/mocks/db';
 
 vi.mock('@/lib/db', () => ({
-  db: mockPrisma,
+    db: mockPrisma,
 }));
 
 beforeEach(() => {
-  mockReset(mockPrisma);
+    mockReset(mockPrisma);
 });

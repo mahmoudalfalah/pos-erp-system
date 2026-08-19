@@ -9,30 +9,30 @@ import { authorizeAction } from '@/features/auth/services/authorize-action.servi
 import { Role } from '@/features/auth/types/role.types';
 
 export const createCategoryAction = async (data: unknown): Promise<Result<CategoryDto>> => {
-  const isAuthorized = await authorizeAction([Role.ADMIN, Role.MANAGER]);
+    const isAuthorized = await authorizeAction([Role.ADMIN, Role.MANAGER]);
 
-  if (!isAuthorized.success) {
-    return isAuthorized;
-  }
-
-  try {
-    const validatedResult = validateCreateCategoryInput(data);
-    if (!validatedResult.success) {
-      return validatedResult;
+    if (!isAuthorized.success) {
+        return isAuthorized;
     }
 
-    const result = await createCategory(validatedResult.data);
+    try {
+        const validatedResult = validateCreateCategoryInput(data);
+        if (!validatedResult.success) {
+            return validatedResult;
+        }
 
-    if (!result.success) {
-      return result;
+        const result = await createCategory(validatedResult.data);
+
+        if (!result.success) {
+            return result;
+        }
+
+        return ok(CategoryMapper.toDto(result.data));
+    } catch (e) {
+        console.error('Error in createCategoryAction:', e);
+        return fail({
+            code: 'UNEXPECTED',
+            message: 'An unexpected error occurred while creating the category',
+        });
     }
-
-    return ok(CategoryMapper.toDto(result.data));
-  } catch (e) {
-    console.error('Error in createCategoryAction:', e);
-    return fail({
-      code: 'UNEXPECTED',
-      message: 'An unexpected error occurred while creating the category',
-    });
-  }
 };

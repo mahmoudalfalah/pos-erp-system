@@ -1,9 +1,9 @@
 import type { AppErrorCode } from './error.type';
 
 export type AppError = {
-  code: AppErrorCode;
-  message: string;
-  fields?: Record<string, string[]>;
+    code: AppErrorCode;
+    message: string;
+    fields?: Record<string, string[]>;
 };
 
 export type Result<T = void> = { success: true; data: T } | { success: false; error: AppError };
