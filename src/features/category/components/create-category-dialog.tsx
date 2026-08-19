@@ -2,12 +2,11 @@
 
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Switch } from '@/components/ui/switch';
-import { Label } from '@/components/ui/label';
 import { Controller } from 'react-hook-form';
 import { useCreateCategoryDialog } from '../hooks/use-create-category-dialog';
 import { CREATE_CATEGORY_REGISTERED_FIELDS } from '../configs/create-category-form.configs';
-import {} from '@/components/ui/dialog';
 import { EntityDialogForm } from '@/components/shared/forms/entity-dialog-form/entity-dialog-form';
+import { DynamicField } from '@/components/shared/forms/dynamic-field/dynamic-field';
 
 export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
     const { open, handleOpenChange, onSubmit, form, errors, isSubmitting } =
@@ -24,24 +23,17 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
             onSubmit={form.handleSubmit((data) => onSubmit(data, onCreated))}
         >
             <FieldGroup>
-                {CREATE_CATEGORY_REGISTERED_FIELDS.map((field) => {
-                    const FieldComponent = field.kind;
-                    return (
-                        <Field key={field.id}>
-                            <Label htmlFor={field.name}>{field.label}</Label>
-                            <FieldComponent
-                                id={field.name}
-                                placeholder={field.placeholder}
-                                {...form.register(field.name)}
-                            />
-                            {form.formState.errors[field.name] && (
-                                <FieldError>
-                                    {form.formState.errors[field.name]?.message}
-                                </FieldError>
-                            )}
-                        </Field>
-                    );
-                })}
+                {CREATE_CATEGORY_REGISTERED_FIELDS.map((field) => (
+                    <DynamicField
+                        key={field.id}
+                        id={field.name}
+                        label={field.label}
+                        placeholder={field.placeholder}
+                        registerProps={form.register(field.name)}
+                        component={field.kind}
+                        errorMessage={form.formState.errors[field.name]?.message}
+                    />
+                ))}
                 <Controller
                     name="isActive"
                     control={form.control}
