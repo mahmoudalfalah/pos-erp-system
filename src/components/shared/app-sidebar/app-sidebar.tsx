@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { MonitorPlay } from "lucide-react";
-import SidebarNav from "./sidebar-nav";
-import NavGroups from "./nav-groups";
-import UserMenu  from "./user-menu";
+import { MonitorPlay } from 'lucide-react';
+import SidebarNav from './sidebar-nav';
+import NavGroups from './nav-groups';
+import UserMenu from './user-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -12,20 +12,21 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import type { SessionUser } from "@/features/auth/types/auth.types";
-import type { SidebarConfigs } from "./app-sidebar.types";
-import Link from "next/link";
+} from '@/components/ui/sidebar';
+import type { SessionUser } from '@/features/auth/types/auth.types';
+import type { SidebarConfigs } from './app-sidebar.types';
+import Link from 'next/link';
 
-type AppSidebarProps = React.ComponentProps<typeof Sidebar> & { user: SessionUser, configs: SidebarConfigs };
+type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+  user: SessionUser;
+  configs: SidebarConfigs;
+};
 
 const AppSidebar = ({ user, configs, ...props }: AppSidebarProps) => {
- 
-
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-      <SidebarMenu>
+        <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
@@ -47,7 +48,7 @@ const AppSidebar = ({ user, configs, ...props }: AppSidebarProps) => {
       </SidebarHeader>
 
       <SidebarContent>
-        {configs.navMain.length > 0 && <SidebarNav items={configs.navMain} />}        
+        {configs.navMain.length > 0 && <SidebarNav items={configs.navMain} />}
         <NavGroups groups={configs.navGroups} />
       </SidebarContent>
 
@@ -56,6 +57,6 @@ const AppSidebar = ({ user, configs, ...props }: AppSidebarProps) => {
       </SidebarFooter>
     </Sidebar>
   );
-}
+};
 
 export default AppSidebar;

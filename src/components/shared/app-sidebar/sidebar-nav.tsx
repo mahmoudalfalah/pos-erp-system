@@ -4,9 +4,8 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from '@/components/ui/sidebar'
+} from '@/components/ui/sidebar';
 import type { NavItem } from './app-sidebar.types';
-
 
 const SidebarNav = ({ items }: { items: NavItem[] }) => {
   return (
@@ -24,7 +23,7 @@ const SidebarNav = ({ items }: { items: NavItem[] }) => {
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
-}
+  );
+};
 
 export default SidebarNav;

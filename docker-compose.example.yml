@@ -8,7 +8,7 @@ services:
       POSTGRES_PASSWORD: yourpassword
       POSTGRES_DB: pos_erp
     ports:
-      - "5432:5432"
+      - '5432:5432'
     volumes:
       - pg_data:/var/lib/postgresql/data
 

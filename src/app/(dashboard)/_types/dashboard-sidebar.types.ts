@@ -1,8 +1,8 @@
-import type { Role } from "@/features/auth"
-import type { NavItem } from "@/components/shared/app-sidebar";
+import type { Role } from '@/features/auth';
+import type { NavItem } from '@/components/shared/app-sidebar';
 
-export type DashboardNavItem = NavItem & { 
-  roles: Role[]; 
+export type DashboardNavItem = NavItem & {
+  roles: Role[];
 };
 
 export type DashboardNavGroup = {
@@ -18,4 +18,4 @@ export type DashboardSidebarConfigs = {
 export type FilterSidebarParams = {
   userRole: Role;
   configs: DashboardSidebarConfigs;
-}
+};

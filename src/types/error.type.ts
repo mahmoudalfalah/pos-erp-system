@@ -1,30 +1,19 @@
 // --- Auth ---
 export type AuthErrorCode =
-  | "AUTH_UNAUTHENTICATED"
-  | "AUTH_FORBIDDEN"
-  | "AUTH_USER_ALREADY_EXISTS"
-  | "ACCOUNT_DISABLED"
-  | "AUTH_INVALID_CREDENTIALS";
+  | 'AUTH_UNAUTHENTICATED'
+  | 'AUTH_FORBIDDEN'
+  | 'AUTH_USER_ALREADY_EXISTS'
+  | 'ACCOUNT_DISABLED'
+  | 'AUTH_INVALID_CREDENTIALS';
 
 // --- Products ---
 export type ProductErrorCode =
-  | "PRODUCT_NOT_FOUND"
-  | "PRODUCT_OUT_OF_STOCK"
-  | "PRODUCT_INSUFFICIENT_STOCK";
+  'PRODUCT_NOT_FOUND' | 'PRODUCT_OUT_OF_STOCK' | 'PRODUCT_INSUFFICIENT_STOCK';
 
-export type CategoryErrorCode = 
-  | "CATEGORY_NOT_FOUND"
-  | "CATEGORY_ALREADY_EXISTS";
+export type CategoryErrorCode = 'CATEGORY_NOT_FOUND' | 'CATEGORY_ALREADY_EXISTS';
 
 // --- General ---
-export type GeneralErrorCode =
-  | "VALIDATION"
-  | "UNEXPECTED"
-  | "NOT_FOUND";
+export type GeneralErrorCode = 'VALIDATION' | 'UNEXPECTED' | 'NOT_FOUND';
 
 // --- The single union Result uses ---
-export type AppErrorCode =
-  | AuthErrorCode
-  | ProductErrorCode
-  | CategoryErrorCode
-  | GeneralErrorCode;
+export type AppErrorCode = AuthErrorCode | ProductErrorCode | CategoryErrorCode | GeneralErrorCode;
