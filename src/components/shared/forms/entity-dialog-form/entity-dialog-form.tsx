@@ -30,9 +30,7 @@ export function EntityDialogForm({
 }: EntityDialogFormProps) {
     return (
         <Dialog open={open} onOpenChange={handleOpenChange}>
-            <DialogTrigger asChild>
-                {trigger}
-            </DialogTrigger>
+            <DialogTrigger asChild>{trigger}</DialogTrigger>
 
             <DialogContent>
                 <DialogHeader>
