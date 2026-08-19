@@ -14,13 +14,16 @@ import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
 
 import type { EntityDialogFormProps } from './entity-dialog-form.type';
+import { toLoadingText } from '@/utils/string.utils';
 
 export function EntityDialogForm({
     handleOpenChange,
     open,
+    trigger,
     title,
     description,
-    submitLabel = 'Add',
+    actionLabel = 'Submit',
+    loadingLabel = 'Loading',
     isSubmitting,
     onSubmit,
     children,
@@ -28,7 +31,7 @@ export function EntityDialogForm({
     return (
         <Dialog open={open} onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
-                <Button variant="outline">{submitLabel}</Button>
+                {trigger}
             </DialogTrigger>
 
             <DialogContent>
@@ -46,7 +49,7 @@ export function EntityDialogForm({
                         </DialogClose>
                         <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
                             {isSubmitting && <Spinner data-icon="inline-start" />}
-                            {isSubmitting ? 'Creating...' : 'Create'}
+                            {isSubmitting ? toLoadingText(loadingLabel) : actionLabel}
                         </Button>
                     </DialogFooter>
                 </form>
