@@ -9,32 +9,32 @@ import { useCategoryGrid } from '../hooks/use-categories-grid';
 import { datasource } from '@/features/category/lib/category-listing-datasource';
 
 export function CategoriesGrid({
-  refreshKey,
-  ref,
-  onHasSelectedRowsChange,
+    refreshKey,
+    ref,
+    onHasSelectedRowsChange,
 }: {
-  refreshKey: number;
-  ref: Ref<DataGridHandle<CategoryDto>>;
-  onHasSelectedRowsChange: (hasSelectedRows: boolean) => void;
+    refreshKey: number;
+    ref: Ref<DataGridHandle<CategoryDto>>;
+    onHasSelectedRowsChange: (hasSelectedRows: boolean) => void;
 }) {
-  const { pageSize, page, PAGE_SIZE_OPTIONS, handlePaginationChange, gridApiRef } =
-    useCategoryGrid(refreshKey);
+    const { pageSize, page, PAGE_SIZE_OPTIONS, handlePaginationChange, gridApiRef } =
+        useCategoryGrid(refreshKey);
 
-  return (
-    <div className="h-[500px]">
-      <DataGrid<CategoryDto>
-        columnDefs={CATEGORIES_MANAGEMENT_PAGE_CONFIGS}
-        getRowId={({ data }) => data?.id}
-        rowSelection={{ mode: 'multiRow' }}
-        datasource={datasource}
-        pageSize={pageSize}
-        pageSizeOptions={PAGE_SIZE_OPTIONS}
-        initialPage={page}
-        onPaginationChange={handlePaginationChange}
-        onReady={(api) => (gridApiRef.current = api)}
-        ref={ref}
-        onHasSelectedRowsChange={onHasSelectedRowsChange}
-      />
-    </div>
-  );
+    return (
+        <div className="h-[500px]">
+            <DataGrid<CategoryDto>
+                columnDefs={CATEGORIES_MANAGEMENT_PAGE_CONFIGS}
+                getRowId={({ data }) => data?.id}
+                rowSelection={{ mode: 'multiRow' }}
+                datasource={datasource}
+                pageSize={pageSize}
+                pageSizeOptions={PAGE_SIZE_OPTIONS}
+                initialPage={page}
+                onPaginationChange={handlePaginationChange}
+                onReady={(api) => (gridApiRef.current = api)}
+                ref={ref}
+                onHasSelectedRowsChange={onHasSelectedRowsChange}
+            />
+        </div>
+    );
 }
