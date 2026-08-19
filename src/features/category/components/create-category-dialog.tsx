@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -10,19 +10,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
-import { Controller } from "react-hook-form";
-import { useCreateCategoryDialog } from "../hooks/use-create-category-dialog";
-import { CREATE_CATEGORY_REGISTERED_FIELDS } from "../configs/create-category-form.configs";
-import { Spinner } from "@/components/ui/spinner";
+} from '@/components/ui/dialog';
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
+import { Controller } from 'react-hook-form';
+import { useCreateCategoryDialog } from '../hooks/use-create-category-dialog';
+import { CREATE_CATEGORY_REGISTERED_FIELDS } from '../configs/create-category-form.configs';
+import { Spinner } from '@/components/ui/spinner';
 
 export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
   const { open, handleOpenChange, onSubmit, form, errors, isSubmitting } =
@@ -41,9 +36,7 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
         >
           <DialogHeader>
             <DialogTitle>Create Category</DialogTitle>
-            <DialogDescription>
-              Enter the details for the new category.
-            </DialogDescription>
+            <DialogDescription>Enter the details for the new category.</DialogDescription>
           </DialogHeader>
 
           <FieldGroup>
@@ -58,9 +51,7 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
                     {...form.register(field.name)}
                   />
                   {form.formState.errors[field.name] && (
-                    <FieldError>
-                      {form.formState.errors[field.name]?.message}
-                    </FieldError>
+                    <FieldError>{form.formState.errors[field.name]?.message}</FieldError>
                   )}
                 </Field>
               );
@@ -70,22 +61,14 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field orientation="horizontal">
-                  <Switch
-                    id={field.name}
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
+                  <Switch id={field.name} checked={field.value} onCheckedChange={field.onChange} />
                   <FieldLabel htmlFor={field.name}>Is Active</FieldLabel>
-                  {fieldState.error && (
-                    <FieldError>{fieldState.error.message}</FieldError>
-                  )}
+                  {fieldState.error && <FieldError>{fieldState.error.message}</FieldError>}
                 </Field>
               )}
             />
             {errors.root?.server?.message && (
-              <p className="text-sm text-red-500">
-                {errors.root.server.message}
-              </p>
+              <p className="text-sm text-red-500">{errors.root.server.message}</p>
             )}
           </FieldGroup>
           <DialogFooter>
@@ -94,13 +77,9 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
                 Cancel
               </Button>
             </DialogClose>
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              aria-busy={isSubmitting}
-            >
+            <Button type="submit" disabled={isSubmitting} aria-busy={isSubmitting}>
               {isSubmitting && <Spinner data-icon="inline-start" />}
-              {isSubmitting ? "Creating..." : "Create"}
+              {isSubmitting ? 'Creating...' : 'Create'}
             </Button>
           </DialogFooter>
         </form>

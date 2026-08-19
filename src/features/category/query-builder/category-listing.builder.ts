@@ -1,10 +1,8 @@
-import type { CategoryListingParams } from "../validators/category-listing.validator";
-import type { CategoryListingQuery } from "../types/category-listing.type";
-import type { Prisma } from "@/generated/prisma";
+import type { CategoryListingParams } from '../validators/category-listing.validator';
+import type { CategoryListingQuery } from '../types/category-listing.type';
+import type { Prisma } from '@/generated/prisma';
 
-export function buildCategoryListingQuery(
-  params: CategoryListingParams,
-): CategoryListingQuery {
+export function buildCategoryListingQuery(params: CategoryListingParams): CategoryListingQuery {
   const where: Prisma.CategoryWhereInput = {
     deletedAt: null,
   };
@@ -14,25 +12,25 @@ export function buildCategoryListingQuery(
       {
         name: {
           contains: params.search,
-          mode: "insensitive",
+          mode: 'insensitive',
         },
       },
       {
         slug: {
           contains: params.search,
-          mode: "insensitive",
+          mode: 'insensitive',
         },
       },
     ];
   }
 
-  if (params.status !== "all") {
-    where.isActive = params.status === "active";
+  if (params.status !== 'all') {
+    where.isActive = params.status === 'active';
   }
 
   const orderBy: Prisma.CategoryOrderByWithRelationInput[] = [
     { [params.sortBy]: params.sortOrder },
-    { id: "asc" },
+    { id: 'asc' },
   ];
 
   return {

@@ -13,17 +13,17 @@ Branches must follow this format:
 
 ### Allowed Branch Type Prefixes
 
-| Prefix | Purpose |
-|---|---|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `hotfix` | Emergency patch outside normal issue cycle |
-| `chore` | Maintenance, config, tooling |
+| Prefix     | Purpose                                    |
+| ---------- | ------------------------------------------ |
+| `feat`     | New feature                                |
+| `fix`      | Bug fix                                    |
+| `hotfix`   | Emergency patch outside normal issue cycle |
+| `chore`    | Maintenance, config, tooling               |
 | `refactor` | Code restructuring without behavior change |
-| `ci` | CI/CD pipeline changes |
-| `docs` | Documentation only |
-| `test` | Test additions or corrections |
-| `perf` | Performance improvements |
+| `ci`       | CI/CD pipeline changes                     |
+| `docs`     | Documentation only                         |
+| `test`     | Test additions or corrections              |
+| `perf`     | Performance improvements                   |
 
 > **Enforced by CI** — branches not matching this convention will be rejected.
 
@@ -39,17 +39,17 @@ type(scope): description
 
 ### Allowed Commit Types
 
-| Type | Purpose |
-|---|---|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `hotfix` | Emergency patch |
-| `chore` | Maintenance, config, tooling |
+| Type       | Purpose                                    |
+| ---------- | ------------------------------------------ |
+| `feat`     | New feature                                |
+| `fix`      | Bug fix                                    |
+| `hotfix`   | Emergency patch                            |
+| `chore`    | Maintenance, config, tooling               |
 | `refactor` | Code restructuring without behavior change |
-| `ci` | CI/CD pipeline changes |
-| `docs` | Documentation only |
-| `test` | Test additions or corrections |
-| `perf` | Performance improvements |
+| `ci`       | CI/CD pipeline changes                     |
+| `docs`     | Documentation only                         |
+| `test`     | Test additions or corrections              |
+| `perf`     | Performance improvements                   |
 
 > **Enforced by CI** — commits not matching this convention will be rejected.
 
@@ -94,12 +94,13 @@ Tests that need a mocked Prisma client should **not** create their own `mockDeep
 **In a new test file, just import the mock and set return values:**
 
 ```typescript
-import { mockPrisma } from "@/tests/mocks/db";
+import { mockPrisma } from '@/tests/mocks/db';
 
 mockPrisma.category.create.mockResolvedValue(fakeDbResponse);
 ```
 
 Do not:
+
 - Redefine `mockDeep<PrismaClient>()` in a test file
 - Call `vi.mock("@/lib/db", ...)` outside of `src/tests/setup.ts`
 - Call `mockReset` yourself — it already runs globally before every test

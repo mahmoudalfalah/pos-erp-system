@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   SidebarGroup,
@@ -6,9 +6,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import Link from "next/link";
-import type { NavGroup } from "./app-sidebar.types";
+} from '@/components/ui/sidebar';
+import Link from 'next/link';
+import type { NavGroup } from './app-sidebar.types';
 
 const NavGroups = ({ groups }: { groups: NavGroup[] }) => {
   return (
@@ -32,6 +32,6 @@ const NavGroups = ({ groups }: { groups: NavGroup[] }) => {
       ))}
     </>
   );
-}
+};
 
 export default NavGroups;

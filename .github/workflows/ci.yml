@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-        
+
       - name: Configure Node.js Environment
         uses: actions/setup-node@v4
         with:
@@ -39,7 +39,7 @@ jobs:
 
       - name: Execute Strict Linting
         run: npm run lint
-      
+
       - name: Execute Type Check
         run: npx tsc --noEmit
 

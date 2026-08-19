@@ -1,57 +1,57 @@
-import { listCategories } from "./category-listing.query";
-import { authorizeAction } from "@/features/auth/services/authorize-action.service";
-import { mockPrisma } from "@/tests/mocks/db";
-import type { CategoryListingRawParams } from "../validators/category-listing.validator";
-import type { CategoryListingResult } from "../types/category-listing.type";
-import { fail, ok } from "@/types/result.type";
-import { Role } from "@/features/auth";
-import type { Category } from "@/generated/prisma";
-import { CategoryMapper } from "../mappers/category.mapper";
+import { listCategories } from './category-listing.query';
+import { authorizeAction } from '@/features/auth/services/authorize-action.service';
+import { mockPrisma } from '@/tests/mocks/db';
+import type { CategoryListingRawParams } from '../validators/category-listing.validator';
+import type { CategoryListingResult } from '../types/category-listing.type';
+import { fail, ok } from '@/types/result.type';
+import { Role } from '@/features/auth';
+import type { Category } from '@/generated/prisma';
+import { CategoryMapper } from '../mappers/category.mapper';
 
-vi.mock("server-only", () => ({}));
+vi.mock('server-only', () => ({}));
 
-vi.mock("@/features/auth/services/authorize-action.service", () => ({
+vi.mock('@/features/auth/services/authorize-action.service', () => ({
   authorizeAction: vi.fn(),
 }));
 
 const mockAuthorizeAction = vi.mocked(authorizeAction);
 
 const validParams: CategoryListingRawParams = {
-  search: "Electronics",
+  search: 'Electronics',
   page: 1,
   perPage: 20,
-  status: "active",
-  sortBy: "name",
-  sortOrder: "desc",
+  status: 'active',
+  sortBy: 'name',
+  sortOrder: 'desc',
 };
 
 const categoryRecord: Category = {
-  id: "category-id",
-  name: "Electronics",
-  slug: "electronics",
-  description: "All electronic items",
+  id: 'category-id',
+  name: 'Electronics',
+  slug: 'electronics',
+  description: 'All electronic items',
   isActive: true,
-  createdAt: new Date("2023-01-01T00:00:00Z"),
-  updatedAt: new Date("2023-01-02T00:00:00Z"),
+  createdAt: new Date('2023-01-01T00:00:00Z'),
+  updatedAt: new Date('2023-01-02T00:00:00Z'),
   deletedAt: null,
 };
 
 const AUTHORIZED_ROLES: readonly Role[] = [Role.ADMIN, Role.MANAGER];
 
 const authorizedUser = ok({
-  id: "user-id",
+  id: 'user-id',
   role: Role.ADMIN,
 });
 
-describe("listCategories", () => {
+describe('listCategories', () => {
   beforeEach(() => {
     mockAuthorizeAction.mockReset();
   });
 
-  it("returns the authorization failure without accessing the database", async () => {
+  it('returns the authorization failure without accessing the database', async () => {
     const authorizationFailure = fail({
-      code: "AUTH_FORBIDDEN",
-      message: "User does not have permission to perform this action.",
+      code: 'AUTH_FORBIDDEN',
+      message: 'User does not have permission to perform this action.',
     });
     mockAuthorizeAction.mockResolvedValueOnce(authorizationFailure);
     const result = await listCategories(validParams);
@@ -61,18 +61,18 @@ describe("listCategories", () => {
     expect(mockPrisma.category.count).not.toHaveBeenCalled();
   });
 
-  it("returns the validation failure without accessing the database", async () => {
+  it('returns the validation failure without accessing the database', async () => {
     const validationFailure = fail({
-      code: "VALIDATION",
-      message: "Invalid Query Parameters",
+      code: 'VALIDATION',
+      message: 'Invalid Query Parameters',
       fields: {
-        status: ["Status must be one of active, inactive, or all"],
+        status: ['Status must be one of active, inactive, or all'],
       },
     });
     mockAuthorizeAction.mockResolvedValueOnce(authorizedUser);
     const result = await listCategories({
       ...validParams,
-      status: "invalid",
+      status: 'invalid',
     });
     expect(result).toStrictEqual(validationFailure);
     expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
@@ -80,14 +80,14 @@ describe("listCategories", () => {
     expect(mockPrisma.category.count).not.toHaveBeenCalled();
   });
 
-  it("retrieves matching categories and returns mapped DTOs with pagination metadata", async () => {
+  it('retrieves matching categories and returns mapped DTOs with pagination metadata', async () => {
     mockAuthorizeAction.mockResolvedValueOnce(authorizedUser);
     mockPrisma.category.findMany.mockResolvedValueOnce([categoryRecord]);
     mockPrisma.category.count.mockResolvedValueOnce(95);
     const result = await listCategories({
       ...validParams,
-      page: "3",
-      perPage: "10",
+      page: '3',
+      perPage: '10',
     });
 
     const expectedResult: CategoryListingResult = {
@@ -105,20 +105,20 @@ describe("listCategories", () => {
           {
             name: {
               contains: validParams.search,
-              mode: "insensitive",
+              mode: 'insensitive',
             },
           },
           {
             slug: {
               contains: validParams.search,
-              mode: "insensitive",
+              mode: 'insensitive',
             },
           },
         ],
         isActive: true,
         deletedAt: null,
       },
-      orderBy: [{ name: "desc" }, { id: "asc" }],
+      orderBy: [{ name: 'desc' }, { id: 'asc' }],
       skip: 20,
       take: 10,
     });
@@ -128,13 +128,13 @@ describe("listCategories", () => {
           {
             name: {
               contains: validParams.search,
-              mode: "insensitive",
+              mode: 'insensitive',
             },
           },
           {
             slug: {
               contains: validParams.search,
-              mode: "insensitive",
+              mode: 'insensitive',
             },
           },
         ],
@@ -143,17 +143,16 @@ describe("listCategories", () => {
       },
     });
     expect(result).toStrictEqual(ok(expectedResult));
-
   });
 
-  it("returns an empty listing with zero total pages when no matching results are found", async () => {
+  it('returns an empty listing with zero total pages when no matching results are found', async () => {
     mockAuthorizeAction.mockResolvedValueOnce(authorizedUser);
     mockPrisma.category.findMany.mockResolvedValueOnce([]);
     mockPrisma.category.count.mockResolvedValueOnce(0);
 
     const result = await listCategories({
       ...validParams,
-      search: "non-existing-category",
+      search: 'non-existing-category',
     });
 
     expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
@@ -169,18 +168,16 @@ describe("listCategories", () => {
     );
   });
 
-  it("returns an unexpected failure when the database query fails", async () => {
+  it('returns an unexpected failure when the database query fails', async () => {
     mockAuthorizeAction.mockResolvedValueOnce(authorizedUser);
-    mockPrisma.category.findMany.mockRejectedValueOnce(
-      new Error("Database error"),
-    );
+    mockPrisma.category.findMany.mockRejectedValueOnce(new Error('Database error'));
 
     const result = await listCategories(validParams);
 
     expect(result).toStrictEqual(
       fail({
-        code: "UNEXPECTED",
-        message: "An unexpected error occurred while listing categories",
+        code: 'UNEXPECTED',
+        message: 'An unexpected error occurred while listing categories',
       }),
     );
     expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);

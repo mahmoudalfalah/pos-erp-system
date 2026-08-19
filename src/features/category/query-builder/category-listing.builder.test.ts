@@ -1,102 +1,99 @@
-import { buildCategoryListingQuery } from "./category-listing.builder";
-import type { CategoryListingParams } from "../validators/category-listing.validator";
+import { buildCategoryListingQuery } from './category-listing.builder';
+import type { CategoryListingParams } from '../validators/category-listing.validator';
 
 const baselineParams: CategoryListingParams = {
   search: undefined,
-  status: "all",
-  sortBy: "createdAt",
-  sortOrder: "desc",
+  status: 'all',
+  sortBy: 'createdAt',
+  sortOrder: 'desc',
   page: 1,
   perPage: 20,
 };
 
-describe("buildCategoryListingQuery", () => {
-  it("builds the query for the first page without filters", () => {
+describe('buildCategoryListingQuery', () => {
+  it('builds the query for the first page without filters', () => {
     const result = buildCategoryListingQuery(baselineParams);
     const expectedResult = {
       where: { deletedAt: null },
-      orderBy: [{ createdAt: "desc" }, { id: "asc" }],
+      orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
       skip: 0,
       take: 20,
     };
     expect(result).toStrictEqual(expectedResult);
   });
 
-  it("builds a case-insensitive search filter for name and slug", () => {
+  it('builds a case-insensitive search filter for name and slug', () => {
     const params = {
       ...baselineParams,
-      search: "Electronics",
+      search: 'Electronics',
     };
     const result = buildCategoryListingQuery(params);
     const expectedWhere = {
       OR: [
         {
           name: {
-            contains: "Electronics",
-            mode: "insensitive",
+            contains: 'Electronics',
+            mode: 'insensitive',
           },
         },
         {
           slug: {
-            contains: "Electronics",
-            mode: "insensitive",
+            contains: 'Electronics',
+            mode: 'insensitive',
           },
         },
       ],
-      deletedAt: null
+      deletedAt: null,
     };
     expect(result.where).toStrictEqual(expectedWhere);
   });
 
   it.each([
-    ["active", true],
-    ["inactive", false],
-  ] as const)(
-    "maps the %s status to isActive: %s",
-    (status, expectedIsActive) => {
-      const params = {
-        ...baselineParams,
-        status: status,
-      };
-      const result = buildCategoryListingQuery(params);
-      const expectedWhere = {
-        isActive: expectedIsActive,
-        deletedAt: null
-      };
-      expect(result.where).toStrictEqual(expectedWhere);
-    },
-  );
-
-  it("combines search and status filters", () => {
-    const params: CategoryListingParams = {
+    ['active', true],
+    ['inactive', false],
+  ] as const)('maps the %s status to isActive: %s', (status, expectedIsActive) => {
+    const params = {
       ...baselineParams,
-      search: "Electronics",
-      status: "inactive",
+      status: status,
     };
     const result = buildCategoryListingQuery(params);
     const expectedWhere = {
-        OR: [
-            {
-            name: {
-                contains: "Electronics",
-                mode: "insensitive",
-            },
-            },
-            {
-            slug: {
-                contains: "Electronics",
-                mode: "insensitive",
-            },
-            },
-        ],
-        isActive: false,
-        deletedAt: null
+      isActive: expectedIsActive,
+      deletedAt: null,
+    };
+    expect(result.where).toStrictEqual(expectedWhere);
+  });
+
+  it('combines search and status filters', () => {
+    const params: CategoryListingParams = {
+      ...baselineParams,
+      search: 'Electronics',
+      status: 'inactive',
+    };
+    const result = buildCategoryListingQuery(params);
+    const expectedWhere = {
+      OR: [
+        {
+          name: {
+            contains: 'Electronics',
+            mode: 'insensitive',
+          },
+        },
+        {
+          slug: {
+            contains: 'Electronics',
+            mode: 'insensitive',
+          },
+        },
+      ],
+      isActive: false,
+      deletedAt: null,
     };
 
     expect(result.where).toStrictEqual(expectedWhere);
   });
 
-  it("calculates skip and take for pagination", () => {
+  it('calculates skip and take for pagination', () => {
     const params = {
       ...baselineParams,
       page: 3,
@@ -108,21 +105,21 @@ describe("buildCategoryListingQuery", () => {
     expect(result.take).toBe(25);
   });
 
-  it("builds the requested sorting with an ascending ID tie-breaker", () => {
+  it('builds the requested sorting with an ascending ID tie-breaker', () => {
     const params: CategoryListingParams = {
       ...baselineParams,
-      sortBy: "name",
-      sortOrder: "asc",
+      sortBy: 'name',
+      sortOrder: 'asc',
     };
 
     const result = buildCategoryListingQuery(params);
 
     const expectedOrderBy = [
       {
-        name: "asc",
+        name: 'asc',
       },
       {
-        id: "asc",
+        id: 'asc',
       },
     ];
 

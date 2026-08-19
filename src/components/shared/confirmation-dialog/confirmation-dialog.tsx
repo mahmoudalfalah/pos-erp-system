@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {
   AlertDialog,
@@ -10,39 +10,31 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import type { ConfirmationDialogProps } from "./confirmation-dialog.type";
+} from '@/components/ui/alert-dialog';
+import type { ConfirmationDialogProps } from './confirmation-dialog.type';
 
 export function ConfirmationDialog({
   trigger,
   title,
   description,
-  confirmLabel = "Continue",
-  cancelLabel = "Cancel",
+  confirmLabel = 'Continue',
+  cancelLabel = 'Cancel',
   onConfirm,
   onCancel,
 }: ConfirmationDialogProps) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger asChild>
-        {trigger}
-      </AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>
-            {description}
-          </AlertDialogDescription>
+          <AlertDialogDescription>{description}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={onCancel}>
-            {cancelLabel}
-          </AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>
-            {confirmLabel}
-          </AlertDialogAction>
+          <AlertDialogCancel onClick={onCancel}>{cancelLabel}</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>{confirmLabel}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

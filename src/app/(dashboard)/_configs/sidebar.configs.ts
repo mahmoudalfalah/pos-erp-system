@@ -8,49 +8,81 @@ import {
   BarChart4,
   Users,
   Settings,
-} from "lucide-react";
-import { Role } from "@/features/auth/types/role.types"
-import type { DashboardSidebarConfigs } from "../_types/dashboard-sidebar.types";
-
-
-
+} from 'lucide-react';
+import { Role } from '@/features/auth/types/role.types';
+import type { DashboardSidebarConfigs } from '../_types/dashboard-sidebar.types';
 
 export const SIDEBAR_CONFIGS: DashboardSidebarConfigs = {
   navMain: [
     {
-      title: "Dashboard",
-      url: "/dashboard",
+      title: 'Dashboard',
+      url: '/dashboard',
       icon: LayoutDashboard,
       roles: [Role.ADMIN, Role.MANAGER],
     },
   ],
   navGroups: [
     {
-      label: "Catalog & Inventory",
+      label: 'Catalog & Inventory',
       items: [
-        { title: "Products", url: "/dashboard/products", icon: Package, roles: [Role.ADMIN, Role.MANAGER] },
-        { title: "Categories & Brands", url: "/dashboard/categories", icon: Tags, roles: [Role.ADMIN, Role.MANAGER] },
-        { title: "Stock Receipts", url: "/dashboard/stock", icon: ArrowDownToLine, roles: [Role.ADMIN, Role.MANAGER] },
+        {
+          title: 'Products',
+          url: '/dashboard/products',
+          icon: Package,
+          roles: [Role.ADMIN, Role.MANAGER],
+        },
+        {
+          title: 'Categories & Brands',
+          url: '/dashboard/categories',
+          icon: Tags,
+          roles: [Role.ADMIN, Role.MANAGER],
+        },
+        {
+          title: 'Stock Receipts',
+          url: '/dashboard/stock',
+          icon: ArrowDownToLine,
+          roles: [Role.ADMIN, Role.MANAGER],
+        },
       ],
     },
     {
-      label: "Supply Chain",
+      label: 'Supply Chain',
       items: [
-        { title: "Suppliers", url: "/dashboard/suppliers", icon: Truck, roles: [Role.ADMIN, Role.MANAGER] },
-        { title: "Invoices", url: "/dashboard/invoices", icon: Receipt, roles: [Role.ADMIN, Role.MANAGER] },
+        {
+          title: 'Suppliers',
+          url: '/dashboard/suppliers',
+          icon: Truck,
+          roles: [Role.ADMIN, Role.MANAGER],
+        },
+        {
+          title: 'Invoices',
+          url: '/dashboard/invoices',
+          icon: Receipt,
+          roles: [Role.ADMIN, Role.MANAGER],
+        },
       ],
     },
     {
-      label: "Insights",
+      label: 'Insights',
       items: [
-        { title: "Reports", url: "/dashboard/reports", icon: BarChart4, roles: [Role.ADMIN, Role.MANAGER] },
+        {
+          title: 'Reports',
+          url: '/dashboard/reports',
+          icon: BarChart4,
+          roles: [Role.ADMIN, Role.MANAGER],
+        },
       ],
     },
     {
-      label: "Administration",
+      label: 'Administration',
       items: [
-        { title: "Staff Management", url: "/dashboard/staff", icon: Users, roles: [Role.ADMIN] },
-        { title: "System Settings", url: "/dashboard/settings", icon: Settings, roles: [Role.ADMIN] },
+        { title: 'Staff Management', url: '/dashboard/staff', icon: Users, roles: [Role.ADMIN] },
+        {
+          title: 'System Settings',
+          url: '/dashboard/settings',
+          icon: Settings,
+          roles: [Role.ADMIN],
+        },
       ],
     },
   ],

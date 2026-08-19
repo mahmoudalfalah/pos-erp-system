@@ -1,12 +1,12 @@
-import { defineConfig } from "vitest/config";
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   resolve: {
     tsconfigPaths: true,
   },
   test: {
-    environment: "node",
+    environment: 'node',
     globals: true,
-    setupFiles: ["./src/tests/setup.ts"],
+    setupFiles: ['./src/tests/setup.ts'],
   },
 });
