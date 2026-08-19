@@ -1,6 +1,7 @@
 'use client';
 
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import { Controller } from 'react-hook-form';
 import { useCreateCategoryDialog } from '../hooks/use-create-category-dialog';
@@ -16,9 +17,11 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
         <EntityDialogForm
             handleOpenChange={handleOpenChange}
             open={open}
-            title="Create category"
+            trigger={<Button variant="outline">Create Cateogry</Button>}
+            title="Create Category"
             description="Enter the details for the new category."
-            submitLabel="Add cagtegory"
+            actionLabel="Create"
+            loadingLabel="Creating"
             isSubmitting={isSubmitting}
             onSubmit={form.handleSubmit((data) => onSubmit(data, onCreated))}
         >
