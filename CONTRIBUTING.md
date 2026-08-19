@@ -83,6 +83,20 @@ Example: `chore(infrastructure): establish CONTRIBUTING.md for Git workflow`
 
 ---
 
+## Code Formatting
+
+All codebase files must be formatted using Prettier before opening a Pull Request.
+
+To format your code locally, run:
+
+```
+npx prettier --write .
+```
+
+> **Enforced by CI** — PRs with unformatted files will be rejected.
+
+---
+
 ## Testing: Shared Prisma Mock
 
 Tests that need a mocked Prisma client should **not** create their own `mockDeep<PrismaClient>()` instance or call `vi.mock("@/lib/db", ...)` locally. A single shared mock is already wired up globally:

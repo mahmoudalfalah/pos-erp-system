@@ -37,6 +37,9 @@ jobs:
             - name: Generate Prisma Client
               run: npx prisma generate --schema=prisma/schema.prisma
 
+            - name: Execute Code Formatting Check
+              run: npm run format:check
+
             - name: Execute Strict Linting
               run: npm run lint
 
