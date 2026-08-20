@@ -3,7 +3,7 @@ import type { ReactNode, ReactElement, SubmitEventHandler } from 'react';
 export type EntityDialogFormProps = {
     handleOpenChange: (nextOpen: boolean) => void;
     open: boolean;
-    trigger: ReactElement;
+    trigger?: ReactElement;
     title: string;
     description: string;
     actionLabel?: string;
