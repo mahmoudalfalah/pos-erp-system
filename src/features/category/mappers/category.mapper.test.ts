@@ -40,5 +40,18 @@ describe('CategoryMapper', () => {
                 updatedAt: updatedAt.toISOString(),
             });
         });
+        it('maps a null description to undefined', () => {
+            const noDescriptionCategory = {
+                ...domainCategory,
+                description: null,
+            };
+            const result = CategoryMapper.toDto(noDescriptionCategory);
+            expect(result).toStrictEqual({
+                ...noDescriptionCategory,
+                description: undefined,
+                createdAt: createdAt.toISOString(),
+                updatedAt: updatedAt.toISOString(),
+            });
+        });
     });
 });

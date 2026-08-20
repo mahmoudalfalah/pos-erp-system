@@ -17,6 +17,7 @@ export const CategoryMapper = {
     toDto(domain: Category): CategoryDto {
         return {
             ...domain,
+            description: domain.description ?? undefined,
             createdAt: domain.createdAt.toISOString(),
             updatedAt: domain.updatedAt.toISOString(),
         };
