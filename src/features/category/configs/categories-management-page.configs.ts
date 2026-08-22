@@ -1,5 +1,6 @@
 import type { ColDef } from 'ag-grid-community';
 import { CategoryDto } from '../dtos/category.dto';
+import { EditActionCell } from '@/components/shared/data-grid';
 
 export const CATEGORIES_MANAGEMENT_PAGE_CONFIGS: ColDef<CategoryDto>[] = [
     {
@@ -23,3 +24,21 @@ export const CATEGORIES_MANAGEMENT_PAGE_CONFIGS: ColDef<CategoryDto>[] = [
         field: 'createdAt',
     },
 ];
+
+export function getCategoriesListingGridConfigs(
+    onEdit: (data: CategoryDto) => void,
+): ColDef<CategoryDto>[] {
+    return [
+        ...CATEGORIES_MANAGEMENT_PAGE_CONFIGS,
+        {
+            headerName: 'Actions',
+            colId: 'actions',
+            sortable: false,
+            filter: false,
+            cellRenderer: EditActionCell,
+            cellRendererParams: {
+                onEdit,
+            },
+        },
+    ];
+}

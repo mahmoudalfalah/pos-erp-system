@@ -1,6 +1,7 @@
 'use client';
 
 import CreateCategoryDialog from './create-category-dialog';
+import { UpdateCategoryDialog } from './update-category-dialog';
 import { CategoriesGrid } from './categories-grid';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
@@ -15,7 +16,9 @@ export function CategoriesManagement() {
         hasSelectedRows,
         refreshCategories,
         handleHasSelectedRowsChange,
+        handleSelectForUpdate,
         handleDelete,
+        categoryToUpdate,
     } = useCategoriesManagement();
 
     const deleteButton = (
@@ -27,6 +30,11 @@ export function CategoriesManagement() {
     return (
         <div className="p-10">
             <CreateCategoryDialog onCreated={refreshCategories} />
+            <UpdateCategoryDialog
+                onUpdated={refreshCategories}
+                handleSelectForUpdate={handleSelectForUpdate}
+                categoryToUpdate={categoryToUpdate}
+            />
             {!hasSelectedRows ? (
                 <Tooltip>
                     <TooltipTrigger asChild>
@@ -52,6 +60,7 @@ export function CategoriesManagement() {
                 refreshKey={refreshKey}
                 ref={dataGridRef}
                 onHasSelectedRowsChange={handleHasSelectedRowsChange}
+                handleSelectForUpdate={handleSelectForUpdate}
             />
         </div>
     );
