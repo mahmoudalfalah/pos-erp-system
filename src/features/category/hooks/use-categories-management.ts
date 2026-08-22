@@ -8,9 +8,14 @@ export function useCategoriesManagement() {
     const [refreshKey, setRefreshKey] = useState(0);
     const dataGridRef = useRef<DataGridHandle<CategoryDto> | null>(null);
     const [hasSelectedRows, setHasSelectedRows] = useState(false);
+    const [categoryToUpdate, setCategoryToUpdate] = useState<CategoryDto | null>(null);
 
     const refreshCategories = () => {
         setRefreshKey((prev) => prev + 1);
+    };
+
+    const handleSelectForUpdate = (category: CategoryDto | null) => {
+        setCategoryToUpdate(category);
     };
 
     const handleDelete = async () => {
@@ -39,6 +44,8 @@ export function useCategoriesManagement() {
         dataGridRef,
         hasSelectedRows,
         handleHasSelectedRowsChange,
+        handleSelectForUpdate,
         handleDelete,
+        categoryToUpdate,
     };
 }
