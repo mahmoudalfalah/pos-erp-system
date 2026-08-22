@@ -7,7 +7,7 @@ let mqlCache: MediaQueryList | null = null;
 function getMql() {
     if (typeof window === 'undefined') return null;
     if (!mqlCache) {
-        mqlCache = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
+        mqlCache = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
     }
     return mqlCache;
 }
