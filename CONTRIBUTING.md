@@ -85,12 +85,14 @@ Example: `chore(infrastructure): establish CONTRIBUTING.md for Git workflow`
 
 ## Code Formatting
 
-All codebase files must be formatted using Prettier before opening a Pull Request.
+All codebase files must be formatted using Prettier.
 
-To format your code locally, run:
+A pre-commit hook is configured via Husky and `lint-staged` to **automatically format your staged files** whenever you commit. You do not need to run formatting manually during normal development.
+
+If you ever need to forcefully format the entire project manually, run:
 
 ```
-npx prettier --write .
+npm run format
 ```
 
 > **Enforced by CI** — PRs with unformatted files will be rejected.
