@@ -8,6 +8,8 @@ export type Product = {
     currentPrice: number;
     currentCost: number;
     isActive: boolean;
+    categoryId: string;
+    brandId: string | null;
     createdAt: Date;
     updatedAt: Date;
 };
