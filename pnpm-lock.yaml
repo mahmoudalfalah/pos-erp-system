@@ -20,6 +20,9 @@ importers:
       '@prisma/client':
         specifier: ^7.8.0
         version: 7.10.0(prisma@7.10.0(@types/react-dom@19.2.5(@types/react@19.2.18))(@types/react@19.2.18)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.9.3))(typescript@5.9.3)
+      ag-grid-community:
+        specifier: ^36.1.0
+        version: 36.1.0
       ag-grid-react:
         specifier: ^36.1.0
         version: 36.1.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
