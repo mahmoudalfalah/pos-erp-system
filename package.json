@@ -59,7 +59,7 @@
         "vitest-mock-extended": "^4.0.0"
     },
     "lint-staged": {
-        "**/*.{js,jsx,ts,tsx,json,css,md}": [
+        "**/*.{js,jsx,ts,tsx,json,css,md,yml,yaml}": [
             "prettier --write"
         ]
     }
