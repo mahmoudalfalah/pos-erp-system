@@ -1,7 +1,9 @@
 import { CategoryMapper } from './category.mapper';
-import type { Category as PrismaCategory } from '@/generated/prisma';
+
+import type { Prisma, Category as PrismaCategory } from '@/generated/prisma';
 import type { Category } from '../types/category.type';
 import type { CategoryDto } from '../dtos/category.dto';
+import type { CreateCategoryInput } from '../validators/create-category.validator';
 
 const createdAt = new Date();
 const updatedAt = new Date();
@@ -37,6 +39,20 @@ const dtoCategory: CategoryDto = {
     updatedAt: updatedAt.toISOString(),
 };
 
+const createCategoryInput: CreateCategoryInput = {
+    name: 'Electronics',
+    slug: 'electronics',
+    description: 'Electronic items',
+    isActive: true,
+};
+
+const prismaCreateCategory: Prisma.CategoryCreateInput = {
+    name: 'Electronics',
+    slug: 'electronics',
+    description: 'Electronic items',
+    isActive: true,
+};
+
 describe('CategoryMapper', () => {
     describe('toDomain', () => {
         it('maps a Prisma categoy to the domain model', () => {
@@ -57,6 +73,13 @@ describe('CategoryMapper', () => {
                 ...dtoCategory,
                 description: undefined,
             });
+        });
+    });
+    describe('toPrismaCreate', () => {
+        it('maps categoy input to prisma category', () => {
+            expect(CategoryMapper.toPrismaCreate(createCategoryInput)).toStrictEqual(
+                prismaCreateCategory,
+            );
         });
     });
 });
