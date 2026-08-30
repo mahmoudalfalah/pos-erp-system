@@ -8,12 +8,7 @@ import { getPrismaUniqueFields } from '@/utils/prisma-errors.util';
 export const createCategory = async (input: CreateCategoryInput): Promise<Result<Category>> => {
     try {
         const rawCategory = await db.category.create({
-            data: {
-                name: input.name,
-                slug: input.slug,
-                description: input.description,
-                isActive: input.isActive,
-            },
+            data: CategoryMapper.toPrismaCreate(input),
         });
 
         return ok(CategoryMapper.toDomain(rawCategory));
