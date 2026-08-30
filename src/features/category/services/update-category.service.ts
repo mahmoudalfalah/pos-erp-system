@@ -14,12 +14,7 @@ export const updateCategory = async (
             where: {
                 id: id,
             },
-            data: {
-                name: input.name,
-                slug: input.slug,
-                description: input.description,
-                isActive: input.isActive,
-            },
+            data: CategoryMapper.toPrismaUpdate(input),
         });
 
         return ok(CategoryMapper.toDomain(rawCategory));

@@ -2,6 +2,7 @@ import type { Prisma, Category as PrismaCategory } from '@/generated/prisma';
 import type { Category } from '../types/category.type';
 import type { CategoryDto } from '../dtos/category.dto';
 import type { CreateCategoryInput } from '../validators/create-category.validator';
+import type { UpdateCategoryInput } from '../validators/update-category.validator';
 
 export const CategoryMapper = {
     toDomain(raw: PrismaCategory): Category {
@@ -27,6 +28,14 @@ export const CategoryMapper = {
         };
     },
     toPrismaCreate(input: CreateCategoryInput): Prisma.CategoryCreateInput {
+        return {
+            name: input.name,
+            slug: input.slug,
+            description: input.description,
+            isActive: input.isActive,
+        };
+    },
+    toPrismaUpdate(input: UpdateCategoryInput): Prisma.CategoryUpdateInput {
         return {
             name: input.name,
             slug: input.slug,
