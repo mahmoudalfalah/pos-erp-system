@@ -16,8 +16,11 @@ export const CategoryMapper = {
     },
     toDto(domain: Category): CategoryDto {
         return {
-            ...domain,
+            id: domain.id,
+            name: domain.name,
+            slug: domain.slug,
             description: domain.description ?? undefined,
+            isActive: domain.isActive,
             createdAt: domain.createdAt.toISOString(),
             updatedAt: domain.updatedAt.toISOString(),
         };
