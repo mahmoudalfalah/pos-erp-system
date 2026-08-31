@@ -1,7 +1,9 @@
 import { ProductMapper } from './product.mapper';
-import type { Product as PrismaProduct } from '@/generated/prisma';
+
+import type { Prisma, Product as PrismaProduct } from '@/generated/prisma';
 import type { Product } from '../types/product.type';
 import type { ProductDto } from '../dtos/product.dto';
+import type { CreateProductInput } from '../validators/create-product.validator';
 
 const createdAt = new Date();
 const updatedAt = new Date();
@@ -55,6 +57,32 @@ const dtoProduct: ProductDto = {
     updatedAt: updatedAt.toISOString(),
 };
 
+const createProductInput: CreateProductInput = {
+    name: 'MacBook Pro',
+    slug: 'macbook-pro',
+    sku: 'macbook-pro-2024',
+    barcode: '8541241241414',
+    description: 'Apple MacBook Pro',
+    currentPrice: 1499.99,
+    currentCost: 1299.99,
+    isActive: true,
+    categoryId: 'laptop',
+    brandId: 'apple',
+};
+
+const prismaCreateProduct: Prisma.ProductUncheckedCreateInput = {
+    name: 'MacBook Pro',
+    slug: 'macbook-pro',
+    sku: 'macbook-pro-2024',
+    barcode: '8541241241414',
+    description: 'Apple MacBook Pro',
+    currentPrice: 1499.99,
+    currentCost: 1299.99,
+    isActive: true,
+    categoryId: 'laptop',
+    brandId: 'apple',
+};
+
 describe('ProductMapper', () => {
     describe('toDomain', () => {
         it('maps a Prisma product to the domain model', () => {
@@ -79,6 +107,13 @@ describe('ProductMapper', () => {
                 barcode: undefined,
                 brandId: undefined,
             });
+        });
+    });
+    describe('toPrismaCreate', () => {
+        it('maps input to a Prisma create object', () => {
+            expect(ProductMapper.toPrismaCreate(createProductInput)).toStrictEqual(
+                prismaCreateProduct,
+            );
         });
     });
 });

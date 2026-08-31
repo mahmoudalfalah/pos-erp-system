@@ -1,6 +1,7 @@
-import type { Product as PrismaProduct } from '@/generated/prisma';
+import type { Prisma, Product as PrismaProduct } from '@/generated/prisma';
 import type { Product } from '../types/product.type';
 import type { ProductDto } from '../dtos/product.dto';
+import { CreateProductInput } from '../validators/create-product.validator';
 
 export const ProductMapper = {
     toDomain(raw: PrismaProduct): Product {
@@ -20,7 +21,6 @@ export const ProductMapper = {
             updatedAt: raw.updatedAt,
         };
     },
-
     toDto(domain: Product): ProductDto {
         return {
             id: domain.id,
@@ -36,6 +36,20 @@ export const ProductMapper = {
             brandId: domain.brandId ?? undefined,
             createdAt: domain.createdAt.toISOString(),
             updatedAt: domain.updatedAt.toISOString(),
+        };
+    },
+    toPrismaCreate(input: CreateProductInput): Prisma.ProductUncheckedCreateInput {
+        return {
+            name: input.name,
+            slug: input.slug,
+            sku: input.sku,
+            barcode: input.barcode,
+            description: input.description,
+            currentPrice: input.currentPrice,
+            currentCost: input.currentCost,
+            isActive: input.isActive,
+            categoryId: input.categoryId,
+            brandId: input.brandId,
         };
     },
 };
