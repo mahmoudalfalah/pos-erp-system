@@ -41,6 +41,7 @@
         "zod": "^4.4.3"
     },
     "devDependencies": {
+        "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
         "@tailwindcss/postcss": "^4",
         "@types/bcrypt": "^6.0.0",
         "@types/node": "^20",
@@ -52,6 +53,7 @@
         "husky": "^9.1.7",
         "lint-staged": "^17.3.0",
         "prettier": "3.9.6",
+        "prettier-plugin-tailwindcss": "^0.8.1",
         "tailwindcss": "^4",
         "tsx": "^4.22.3",
         "typescript": "^5",
