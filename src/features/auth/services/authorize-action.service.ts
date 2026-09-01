@@ -1,7 +1,9 @@
 import 'server-only';
-import { auth } from '@/auth';
+
 import { db } from '@/lib/db';
 import { fail, ok, Result } from '@/types/result.type';
+import { auth } from '@/auth';
+
 import type { AuthorizedUser } from '../types/auth.types';
 import type { Role } from '../types/role.types';
 

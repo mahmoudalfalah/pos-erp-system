@@ -1,9 +1,10 @@
 'use server';
 
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
-import { deleteCategories } from '../services/delete-categories.service';
 import { Role } from '@/features/auth/types/role.types';
 import { fail, type Result } from '@/types/result.type';
+
+import { deleteCategories } from '../services/delete-categories.service';
 import { validateDeleteCategories } from '../validators/delete-categories.validator';
 
 export async function deleteCategoriesAction(ids: unknown): Promise<Result<{ ids: string[] }>> {

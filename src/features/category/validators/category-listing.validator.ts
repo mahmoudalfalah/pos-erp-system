@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ok, fail, type Result } from '@/types/result.type';
+
+import { fail, ok, type Result } from '@/types/result.type';
 
 export const categoryListingParamsSchema = z.object({
     search: z

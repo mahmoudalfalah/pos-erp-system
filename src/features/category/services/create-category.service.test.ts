@@ -1,5 +1,6 @@
-import { mockPrisma } from '@/tests/mocks/db';
 import { Prisma } from '@/generated/prisma';
+import { mockPrisma } from '@/tests/mocks/db';
+
 import { createCategory } from './create-category.service';
 
 describe('Category Service: createCategory', () => {

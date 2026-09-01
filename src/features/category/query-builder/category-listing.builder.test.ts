@@ -1,5 +1,5 @@
-import { buildCategoryListingQuery } from './category-listing.builder';
 import type { CategoryListingParams } from '../validators/category-listing.validator';
+import { buildCategoryListingQuery } from './category-listing.builder';
 
 const baselineParams: CategoryListingParams = {
     search: undefined,

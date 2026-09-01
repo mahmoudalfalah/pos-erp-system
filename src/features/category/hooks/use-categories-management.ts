@@ -1,8 +1,10 @@
-import { useState, useRef } from 'react';
-import type { DataGridHandle } from '@/components/shared/data-grid/data-grid.type';
-import type { CategoryDto } from '../dtos/category.dto';
-import { deleteCategoriesAction } from '../actions/delete-categories.action';
+import { useRef, useState } from 'react';
 import { toast } from 'sonner';
+
+import type { DataGridHandle } from '@/components/shared/data-grid/data-grid.type';
+
+import { deleteCategoriesAction } from '../actions/delete-categories.action';
+import type { CategoryDto } from '../dtos/category.dto';
 
 export function useCategoriesManagement() {
     const [refreshKey, setRefreshKey] = useState(0);

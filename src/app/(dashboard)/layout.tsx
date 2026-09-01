@@ -1,8 +1,10 @@
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import DashboardSidebar from './_components/dashboard-sidebar';
-import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
+
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { Toaster } from '@/components/ui/sonner';
+import { auth } from '@/auth';
+
+import DashboardSidebar from './_components/dashboard-sidebar';
 
 const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
     const session = await auth();

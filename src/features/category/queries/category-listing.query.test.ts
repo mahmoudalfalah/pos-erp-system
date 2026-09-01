@@ -1,12 +1,13 @@
-import { listCategories } from './category-listing.query';
-import { authorizeAction } from '@/features/auth/services/authorize-action.service';
-import { mockPrisma } from '@/tests/mocks/db';
-import type { CategoryListingRawParams } from '../validators/category-listing.validator';
-import type { CategoryListingResult } from '../types/category-listing.type';
-import { fail, ok } from '@/types/result.type';
-import { Role } from '@/features/auth';
 import type { Category } from '@/generated/prisma';
+import { Role } from '@/features/auth';
+import { authorizeAction } from '@/features/auth/services/authorize-action.service';
+import { fail, ok } from '@/types/result.type';
+import { mockPrisma } from '@/tests/mocks/db';
+
 import { CategoryMapper } from '../mappers/category.mapper';
+import type { CategoryListingResult } from '../types/category-listing.type';
+import type { CategoryListingRawParams } from '../validators/category-listing.validator';
+import { listCategories } from './category-listing.query';
 
 vi.mock('server-only', () => ({}));
 

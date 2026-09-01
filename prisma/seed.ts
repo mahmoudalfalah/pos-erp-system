@@ -1,7 +1,9 @@
 import 'dotenv/config';
+
 import { db } from '@/lib/db';
-import { seedUsers } from './seeders/users.seeder';
+
 import { seedCategories } from './seeders/categories.seeder';
+import { seedUsers } from './seeders/users.seeder';
 
 const main = async () => {
     console.log('Starting seed...');

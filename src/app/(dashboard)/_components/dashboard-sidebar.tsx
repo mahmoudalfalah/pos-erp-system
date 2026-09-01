@@ -1,10 +1,12 @@
 'use client';
 
 import { useMemo } from 'react';
-import { SIDEBAR_CONFIGS } from '../_configs/sidebar.configs';
-import AppSidebar from '@/components/shared/app-sidebar';
-import { getFilteredConfigs } from '../_utils/navigation';
+
 import type { SessionUser } from '@/features/auth/types/auth.types';
+import AppSidebar from '@/components/shared/app-sidebar';
+
+import { SIDEBAR_CONFIGS } from '../_configs/sidebar.configs';
+import { getFilteredConfigs } from '../_utils/navigation';
 
 const DashboardSidebar = ({ user }: { user: SessionUser }) => {
     /**

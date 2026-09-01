@@ -1,9 +1,10 @@
 import { db } from '@/lib/db';
+import { getPrismaUniqueFields, isPrismaRecordNotFound } from '@/utils/prisma-errors.util';
+import { fail, ok, type Result } from '@/types/result.type';
+
+import { CategoryMapper } from '../mappers/category.mapper';
 import type { Category } from '../types/category.type';
 import type { UpdateCategoryInput } from '../validators/update-category.validator';
-import { ok, fail, type Result } from '@/types/result.type';
-import { CategoryMapper } from '../mappers/category.mapper';
-import { getPrismaUniqueFields, isPrismaRecordNotFound } from '@/utils/prisma-errors.util';
 
 export const updateCategory = async (
     id: string,

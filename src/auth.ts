@@ -1,9 +1,11 @@
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import bcrypt from 'bcryptjs';
-import { db } from './lib/db';
+import NextAuth from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+
 import { credentialsSchema } from '@/validators/auth.validator';
+
+import { db } from './lib/db';
 
 const authenticateUser = async (credentials: unknown) => {
     const parsed = credentialsSchema.safeParse(credentials);

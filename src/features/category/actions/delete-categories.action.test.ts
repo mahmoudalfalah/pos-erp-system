@@ -1,8 +1,9 @@
+import { Role } from '@/features/auth';
+import { authorizeAction } from '@/features/auth/services/authorize-action.service';
+import { fail, ok } from '@/types/result.type';
+
 import { deleteCategories } from '../services/delete-categories.service';
 import { deleteCategoriesAction } from './delete-categories.action';
-import { authorizeAction } from '@/features/auth/services/authorize-action.service';
-import { ok, fail } from '@/types/result.type';
-import { Role } from '@/features/auth';
 
 vi.mock('server-only', () => ({}));
 

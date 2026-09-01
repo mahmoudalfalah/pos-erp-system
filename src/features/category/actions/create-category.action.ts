@@ -1,12 +1,13 @@
 'use server';
 
-import { validateCreateCategoryInput } from '../validators/create-category.validator';
-import { createCategory } from '../services/create-category.service';
-import { ok, fail, type Result } from '@/types/result.type';
-import { CategoryMapper } from '../mappers/category.mapper';
-import type { CategoryDto } from '../dtos/category.dto';
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
 import { Role } from '@/features/auth/types/role.types';
+import { fail, ok, type Result } from '@/types/result.type';
+
+import type { CategoryDto } from '../dtos/category.dto';
+import { CategoryMapper } from '../mappers/category.mapper';
+import { createCategory } from '../services/create-category.service';
+import { validateCreateCategoryInput } from '../validators/create-category.validator';
 
 export const createCategoryAction = async (data: unknown): Promise<Result<CategoryDto>> => {
     const isAuthorized = await authorizeAction([Role.ADMIN, Role.MANAGER]);

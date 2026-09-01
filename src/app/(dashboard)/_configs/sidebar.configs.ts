@@ -1,15 +1,17 @@
 import {
+    ArrowDownToLine,
+    BarChart4,
     LayoutDashboard,
     Package,
-    Tags,
-    ArrowDownToLine,
-    Truck,
     Receipt,
-    BarChart4,
-    Users,
     Settings,
+    Tags,
+    Truck,
+    Users,
 } from 'lucide-react';
+
 import { Role } from '@/features/auth/types/role.types';
+
 import type { DashboardSidebarConfigs } from '../_types/dashboard-sidebar.types';
 
 export const SIDEBAR_CONFIGS: DashboardSidebarConfigs = {

@@ -1,8 +1,9 @@
-import { createCategoryAction } from '../actions/create-category.action';
-import { createCategory } from '../services/create-category.service';
-import { fail, ok } from '@/types/result.type';
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
 import { Role } from '@/features/auth/types/role.types';
+import { fail, ok } from '@/types/result.type';
+
+import { createCategoryAction } from '../actions/create-category.action';
+import { createCategory } from '../services/create-category.service';
 
 vi.mock('../services/create-category.service', () => ({
     createCategory: vi.fn(),

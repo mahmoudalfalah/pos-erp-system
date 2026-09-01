@@ -1,5 +1,6 @@
+import { fail, ok } from '@/types/result.type';
+
 import { validateDeleteCategories } from './delete-categories.validator';
-import { ok, fail } from '@/types/result.type';
 
 describe('validateDeleteCategories', () => {
     it('accepts an array of valid ids', () => {

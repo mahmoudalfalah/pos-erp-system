@@ -1,12 +1,13 @@
 import {
-    ShoppingCart,
+    Clock,
+    MonitorStop,
+    PauseCircle,
     ReceiptText,
+    ShoppingCart,
     Undo2,
     Users,
-    MonitorStop,
-    Clock,
-    PauseCircle,
 } from 'lucide-react';
+
 import type { SidebarConfigs } from '@/components/shared/app-sidebar';
 
 export const SIDEBAR_CONFIGS: SidebarConfigs = {

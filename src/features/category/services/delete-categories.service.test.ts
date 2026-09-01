@@ -1,6 +1,7 @@
-import { ok, fail } from '@/types/result.type';
+import { fail, ok } from '@/types/result.type';
+import { mockInteractiveTransaction, mockPrisma } from '@/tests/mocks/db';
+
 import { deleteCategories } from './delete-categories.service';
-import { mockPrisma, mockInteractiveTransaction } from '@/tests/mocks/db';
 
 const categoriesIds = [
     'cmshgwq8w0000u0slabj2njs8',

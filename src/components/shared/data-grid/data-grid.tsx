@@ -1,9 +1,9 @@
 'use client';
 
-import { useRef, useImperativeHandle } from 'react';
-import { AllCommunityModule, themeQuartz, colorSchemeDark, type GridApi } from 'ag-grid-community';
-import { AgGridProvider } from 'ag-grid-react';
-import { AgGridReact } from 'ag-grid-react';
+import { useImperativeHandle, useRef } from 'react';
+import { AllCommunityModule, colorSchemeDark, themeQuartz, type GridApi } from 'ag-grid-community';
+import { AgGridProvider, AgGridReact } from 'ag-grid-react';
+
 import type { DataGridProps } from './data-grid.type';
 
 const modules = [AllCommunityModule];

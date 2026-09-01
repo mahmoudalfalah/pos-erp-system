@@ -1,5 +1,6 @@
+import { fail, ok } from '@/types/result.type';
+
 import { validateId } from './id.validator';
-import { ok, fail } from '@/types/result.type';
 
 describe('validateId', () => {
     it('accepts a valid string id', () => {

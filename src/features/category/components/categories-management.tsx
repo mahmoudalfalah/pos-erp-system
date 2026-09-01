@@ -1,13 +1,14 @@
 'use client';
 
-import CreateCategoryDialog from './create-category-dialog';
-import { UpdateCategoryDialog } from './update-category-dialog';
-import { CategoriesGrid } from './categories-grid';
+import { ConfirmationDialog } from '@/components/shared/confirmation-dialog/confirmation-dialog';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import Typography from '@/components/ui/typography';
-import { ConfirmationDialog } from '@/components/shared/confirmation-dialog/confirmation-dialog';
+
 import { useCategoriesManagement } from '../hooks/use-categories-management';
+import { CategoriesGrid } from './categories-grid';
+import CreateCategoryDialog from './create-category-dialog';
+import { UpdateCategoryDialog } from './update-category-dialog';
 
 export function CategoriesManagement() {
     const {

@@ -1,4 +1,5 @@
 import type { Role } from '@/generated/prisma';
+
 import 'next-auth';
 import 'next-auth/jwt';
 

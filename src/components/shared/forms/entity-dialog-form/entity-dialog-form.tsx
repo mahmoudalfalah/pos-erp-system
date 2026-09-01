@@ -1,20 +1,20 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import {
     Dialog,
-    DialogDescription,
-    DialogHeader,
+    DialogClose,
     DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
     DialogTitle,
     DialogTrigger,
-    DialogClose,
-    DialogFooter,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { Spinner } from '@/components/ui/spinner';
+import { toLoadingText } from '@/utils/string.utils';
 
 import type { EntityDialogFormProps } from './entity-dialog-form.type';
-import { toLoadingText } from '@/utils/string.utils';
 
 export function EntityDialogForm({
     handleOpenChange,

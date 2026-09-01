@@ -1,6 +1,7 @@
-import type { CreateCategoryInput } from '../validators/create-category.validator';
 import type { Input } from '@/components/ui/input';
 import type { Textarea } from '@/components/ui/textarea';
+
+import type { CreateCategoryInput } from '../validators/create-category.validator';
 
 export type CreateCategoryRegisteredField = Readonly<{
     id: string;

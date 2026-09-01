@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 import {
     SidebarGroup,
     SidebarGroupLabel,
@@ -7,7 +9,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import Link from 'next/link';
+
 import type { NavGroup } from './app-sidebar.types';
 
 const NavGroups = ({ groups }: { groups: NavGroup[] }) => {

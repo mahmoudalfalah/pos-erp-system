@@ -1,12 +1,14 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
-import { updateCategory } from '../services/update-category.service';
-import { ok, fail } from '@/types/result.type';
 import { Role } from '@/features/auth/types/role.types';
-import { validateUpdateCategoryInput } from '../validators/update-category.validator';
+import { fail, ok } from '@/types/result.type';
+
 import { CategoryMapper } from '../mappers/category.mapper';
+import { updateCategory } from '../services/update-category.service';
+import { validateUpdateCategoryInput } from '../validators/update-category.validator';
 
 export async function updateCategoryAction(id: string, payload: unknown) {
     const isAuthorized = await authorizeAction([Role.ADMIN, Role.MANAGER]);

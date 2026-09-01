@@ -1,6 +1,7 @@
-import type { CategoryListingParams } from '../validators/category-listing.validator';
-import type { CategoryListingQuery } from '../types/category-listing.type';
 import type { Prisma } from '@/generated/prisma';
+
+import type { CategoryListingQuery } from '../types/category-listing.type';
+import type { CategoryListingParams } from '../validators/category-listing.validator';
 
 export function buildCategoryListingQuery(params: CategoryListingParams): CategoryListingQuery {
     const where: Prisma.CategoryWhereInput = {

@@ -1,6 +1,7 @@
-import type { FilterSidebarParams, DashboardNavItem } from '../_types/dashboard-sidebar.types';
-import type { NavItem } from '@/components/shared/app-sidebar';
 import type { Role } from '@/features/auth';
+import type { NavItem } from '@/components/shared/app-sidebar';
+
+import type { DashboardNavItem, FilterSidebarParams } from '../_types/dashboard-sidebar.types';
 
 const filterAndStripRoles = (items: DashboardNavItem[], userRole: Role): NavItem[] => {
     const processedItems: NavItem[] = [];

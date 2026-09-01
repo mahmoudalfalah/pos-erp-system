@@ -1,7 +1,9 @@
 'use client';
+
+import { EllipsisVertical, LogOut } from 'lucide-react';
+
 import { logoutAction } from '@/features/auth/actions/logout.action';
 import type { SessionUser } from '@/features/auth/types/auth.types';
-import { EllipsisVertical, LogOut } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
     DropdownMenu,
@@ -72,7 +74,7 @@ const UserMenu = ({ user }: { user: SessionUser }) => {
                             <form action={logoutAction}>
                                 <button
                                     type="submit"
-                                    className="flex items-center gap-2 w-full cursor-pointer"
+                                    className="flex w-full cursor-pointer items-center gap-2"
                                 >
                                     <LogOut className="size-4" />
                                     <span>Log out</span>

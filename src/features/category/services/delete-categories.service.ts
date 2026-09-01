@@ -1,5 +1,5 @@
-import { ok, fail, type Result } from '@/types/result.type';
 import { db } from '@/lib/db';
+import { fail, ok, type Result } from '@/types/result.type';
 
 class CategoriesDeleteMismatchError extends Error {}
 
