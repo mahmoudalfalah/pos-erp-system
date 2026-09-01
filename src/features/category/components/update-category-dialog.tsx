@@ -1,13 +1,15 @@
 'use client';
 
+import { Controller } from 'react-hook-form';
+
+import { DynamicField } from '@/components/shared/forms/dynamic-field/dynamic-field';
+import { EntityDialogForm } from '@/components/shared/forms/entity-dialog-form/entity-dialog-form';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Switch } from '@/components/ui/switch';
-import { Controller } from 'react-hook-form';
-import { useUpdateCategoryDialog } from '../hooks/use-update-category-dialog';
+
 import { CREATE_CATEGORY_REGISTERED_FIELDS } from '../configs/create-category-form.configs';
-import { EntityDialogForm } from '@/components/shared/forms/entity-dialog-form/entity-dialog-form';
-import { DynamicField } from '@/components/shared/forms/dynamic-field/dynamic-field';
 import type { CategoryDto } from '../dtos/category.dto';
+import { useUpdateCategoryDialog } from '../hooks/use-update-category-dialog';
 
 type UpdateCategoryDialogProps = {
     handleSelectForUpdate: (category: CategoryDto | null) => void;

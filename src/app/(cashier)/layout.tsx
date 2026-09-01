@@ -1,6 +1,8 @@
+import { redirect } from 'next/navigation';
+
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { auth } from '@/auth';
-import { redirect } from 'next/navigation';
+
 import CashierSidebar from './_components/cashier-sidebar';
 
 const CashierLayout = async ({ children }: { children: React.ReactNode }) => {
@@ -16,7 +18,7 @@ const CashierLayout = async ({ children }: { children: React.ReactNode }) => {
     return (
         <SidebarProvider style={sidebarStyles}>
             <CashierSidebar user={session.user} />
-            <SidebarInset className="flex flex-col gap-3 p-2 h-screen">{children}</SidebarInset>
+            <SidebarInset className="flex h-screen flex-col gap-3 p-2">{children}</SidebarInset>
         </SidebarProvider>
     );
 };

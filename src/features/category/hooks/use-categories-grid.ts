@@ -1,6 +1,7 @@
-import { useRef, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { GridApi } from 'ag-grid-community';
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+
 import { getCategoriesListingGridConfigs } from '../configs/categories-management-page.configs';
 import type { CategoryDto } from '../dtos/category.dto';
 

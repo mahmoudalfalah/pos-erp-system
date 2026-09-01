@@ -1,13 +1,14 @@
 import 'server-only';
 
-import { ok, fail, type Result } from '@/types/result.type';
-import { db } from '@/lib/db';
-import { validateCategoryListingParamsSchema } from '../validators/category-listing.validator';
-import { buildCategoryListingQuery } from '../query-builder/category-listing.builder';
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
 import { Role } from '@/features/auth/types/role.types';
+import { db } from '@/lib/db';
+import { fail, ok, type Result } from '@/types/result.type';
+
 import { CategoryMapper } from '../mappers/category.mapper';
+import { buildCategoryListingQuery } from '../query-builder/category-listing.builder';
 import type { CategoryListingResult } from '../types/category-listing.type';
+import { validateCategoryListingParamsSchema } from '../validators/category-listing.validator';
 
 export async function listCategories(params: unknown): Promise<Result<CategoryListingResult>> {
     try {

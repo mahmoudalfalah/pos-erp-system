@@ -1,8 +1,9 @@
-import { mockPrisma } from '@/tests/mocks/db';
 import { Prisma } from '@/generated/prisma';
-import { updateCategory } from './update-category.service';
-import { ok, fail } from '@/types/result.type';
+import { fail, ok } from '@/types/result.type';
+import { mockPrisma } from '@/tests/mocks/db';
+
 import { CategoryMapper } from '../mappers/category.mapper';
+import { updateCategory } from './update-category.service';
 
 const CATEGORY_ID = '22';
 

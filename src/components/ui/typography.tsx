@@ -1,4 +1,5 @@
 import { cva, type VariantProps } from 'class-variance-authority';
+
 import { cn } from '@/lib/utils';
 
 const typographyVariants = cva('', {
@@ -10,8 +11,8 @@ const typographyVariants = cva('', {
             h4: 'scroll-m-8 text-xl font-medium',
             h5: 'text-lg font-semibold',
             h6: 'text-base font-medium',
-            body1: 'text-base font-normal leading-7',
-            body2: 'text-sm font-normal leading-6',
+            body1: 'text-base leading-7 font-normal',
+            body2: 'text-sm leading-6 font-normal',
         },
     },
     defaultVariants: { variant: 'body1' },

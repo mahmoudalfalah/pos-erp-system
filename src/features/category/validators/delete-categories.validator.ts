@@ -1,6 +1,7 @@
 import { z } from 'zod';
-import { ok, fail, type Result } from '@/types/result.type';
+
 import { idSchema } from '@/validators/id.validator';
+import { fail, ok, type Result } from '@/types/result.type';
 
 const deleteCategoriesSchema = z.array(idSchema).min(1);
 

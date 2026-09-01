@@ -1,10 +1,10 @@
-import { CategoryMapper } from './category.mapper';
-
 import type { Prisma, Category as PrismaCategory } from '@/generated/prisma';
-import type { Category } from '../types/category.type';
+
 import type { CategoryDto } from '../dtos/category.dto';
+import type { Category } from '../types/category.type';
 import type { CreateCategoryInput } from '../validators/create-category.validator';
 import type { UpdateCategoryInput } from '../validators/update-category.validator';
+import { CategoryMapper } from './category.mapper';
 
 const createdAt = new Date();
 const updatedAt = new Date();

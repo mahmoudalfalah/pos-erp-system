@@ -2,9 +2,9 @@ import type { Ref } from 'react';
 import type {
     ColDef,
     GetRowIdFunc,
+    GridApi,
     IDatasource,
     RowSelectionOptions,
-    GridApi,
 } from 'ag-grid-community';
 
 export type DataGridHandle<TData> = {

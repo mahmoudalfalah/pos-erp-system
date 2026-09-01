@@ -1,6 +1,7 @@
-import { fail, ok, Result } from '@/types/result.type';
 import { z } from 'zod';
+
 import { emptyToUndefined } from '@/utils/zod.util';
+import { fail, ok, Result } from '@/types/result.type';
 
 export const createProductSchema = z.object({
     name: z

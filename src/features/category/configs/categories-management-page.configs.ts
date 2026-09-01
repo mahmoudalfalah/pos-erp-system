@@ -1,6 +1,8 @@
 import type { ColDef } from 'ag-grid-community';
-import { CategoryDto } from '../dtos/category.dto';
+
 import { EditActionCell } from '@/components/shared/data-grid';
+
+import { CategoryDto } from '../dtos/category.dto';
 
 export const CATEGORIES_MANAGEMENT_PAGE_CONFIGS: ColDef<CategoryDto>[] = [
     {

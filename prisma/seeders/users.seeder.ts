@@ -1,4 +1,5 @@
 import bcrypt from 'bcryptjs';
+
 import { Role } from '@/features/auth/types/role.types';
 import { db } from '@/lib/db';
 

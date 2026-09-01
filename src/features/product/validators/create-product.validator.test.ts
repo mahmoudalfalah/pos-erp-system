@@ -1,5 +1,6 @@
+import { fail, ok } from '@/types/result.type';
+
 import { validateCreateProductInput } from './create-product.validator';
-import { ok, fail } from '@/types/result.type';
 
 const validInput = {
     name: 'Electronics',

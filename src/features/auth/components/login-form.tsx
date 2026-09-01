@@ -2,17 +2,18 @@
 
 import { useLogin } from '@/features/auth/hooks/useLogin';
 import { Button } from '@/components/ui/button';
-import { LOGIN_FORM_FIELDS } from '../configs/login-form.config';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
+
+import { LOGIN_FORM_FIELDS } from '../configs/login-form.config';
 
 const LoginForm = () => {
     const { formAction, state, isPending } = useLogin();
 
     return (
         <Card className="w-full max-w-md shadow-md">
-            <CardHeader className="text-center pb-6">
+            <CardHeader className="pb-6 text-center">
                 <CardTitle>POS ERP System</CardTitle>
                 <CardDescription>Enter your credentials to access your account</CardDescription>
             </CardHeader>
@@ -36,12 +37,12 @@ const LoginForm = () => {
                     </FieldGroup>
 
                     {state.error && (
-                        <div className="rounded-md bg-destructive p-3 text-sm text-destructive-foreground">
+                        <div className="text-destructive-foreground rounded-md bg-destructive p-3 text-sm">
                             {state.error}
                         </div>
                     )}
 
-                    <Button type="submit" disabled={isPending} className="w-full mt-4">
+                    <Button type="submit" disabled={isPending} className="mt-4 w-full">
                         {isPending ? 'Signing in...' : 'Sign in'}
                     </Button>
                 </form>

@@ -1,11 +1,13 @@
 'use client';
 
 import type { Ref } from 'react';
-import { DataGrid } from '@/components/shared/data-grid/data-grid';
-import type { CategoryDto } from '../dtos/category.dto';
-import type { DataGridHandle } from '@/components/shared/data-grid/data-grid.type';
-import { useCategoriesGrid } from '../hooks/use-categories-grid';
+
 import { datasource } from '@/features/category/lib/category-listing-datasource';
+import { DataGrid } from '@/components/shared/data-grid/data-grid';
+import type { DataGridHandle } from '@/components/shared/data-grid/data-grid.type';
+
+import type { CategoryDto } from '../dtos/category.dto';
+import { useCategoriesGrid } from '../hooks/use-categories-grid';
 
 export function CategoriesGrid({
     refreshKey,

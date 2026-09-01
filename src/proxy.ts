@@ -1,7 +1,8 @@
-import { auth } from '@/auth';
 import { NextResponse } from 'next/server';
-import { ROLE_REDIRECTS, PUBLIC_ROUTES, DEFAULT_LOGIN } from '@/lib/constants/paths';
+
 import { Role } from '@/features/auth/types/role.types';
+import { DEFAULT_LOGIN, PUBLIC_ROUTES, ROLE_REDIRECTS } from '@/lib/constants/paths';
+import { auth } from '@/auth';
 
 export const proxy = auth((req) => {
     const { nextUrl } = req;

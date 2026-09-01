@@ -1,4 +1,4 @@
-import type { ReactNode, ReactElement, SubmitEventHandler } from 'react';
+import type { ReactElement, ReactNode, SubmitEventHandler } from 'react';
 
 export type EntityDialogFormProps = {
     handleOpenChange: (nextOpen: boolean) => void;

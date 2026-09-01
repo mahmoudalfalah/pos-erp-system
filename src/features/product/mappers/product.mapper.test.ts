@@ -1,9 +1,9 @@
-import { ProductMapper } from './product.mapper';
-
 import type { Prisma, Product as PrismaProduct } from '@/generated/prisma';
-import type { Product } from '../types/product.type';
+
 import type { ProductDto } from '../dtos/product.dto';
+import type { Product } from '../types/product.type';
 import type { CreateProductInput } from '../validators/create-product.validator';
+import { ProductMapper } from './product.mapper';
 
 const createdAt = new Date();
 const updatedAt = new Date();

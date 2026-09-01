@@ -1,4 +1,5 @@
 import type { Prisma } from '@/generated/prisma';
+
 import type { CategoryDto } from '../dtos/category.dto';
 
 export type CategoryListingQuery = Pick<

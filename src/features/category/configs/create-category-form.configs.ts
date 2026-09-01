@@ -1,7 +1,8 @@
-import type { CreateCategoryInput } from '../validators/create-category.validator';
-import type { CreateCategoryRegisteredField } from '../types/create-category.type';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
+
+import type { CreateCategoryRegisteredField } from '../types/create-category.type';
+import type { CreateCategoryInput } from '../validators/create-category.validator';
 
 export const CREATE_CATEGORY_REGISTERED_FIELDS: CreateCategoryRegisteredField[] = [
     {

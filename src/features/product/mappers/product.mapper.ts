@@ -1,6 +1,7 @@
 import type { Prisma, Product as PrismaProduct } from '@/generated/prisma';
-import type { Product } from '../types/product.type';
+
 import type { ProductDto } from '../dtos/product.dto';
+import type { Product } from '../types/product.type';
 import { CreateProductInput } from '../validators/create-product.validator';
 
 export const ProductMapper = {

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { ok, fail, Result } from '@/types/result.type';
+
+import { fail, ok, Result } from '@/types/result.type';
 
 export const idSchema = z.string().min(1);
 

@@ -1,9 +1,9 @@
 'use client';
 
+import Link from 'next/link';
 import { MonitorPlay } from 'lucide-react';
-import SidebarNav from './sidebar-nav';
-import NavGroups from './nav-groups';
-import UserMenu from './user-menu';
+
+import type { SessionUser } from '@/features/auth/types/auth.types';
 import {
     Sidebar,
     SidebarContent,
@@ -13,9 +13,11 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
-import type { SessionUser } from '@/features/auth/types/auth.types';
+
 import type { SidebarConfigs } from './app-sidebar.types';
-import Link from 'next/link';
+import NavGroups from './nav-groups';
+import SidebarNav from './sidebar-nav';
+import UserMenu from './user-menu';
 
 type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
     user: SessionUser;

@@ -1,8 +1,9 @@
 'use client';
 
-import { SIDEBAR_CONFIGS } from '../_configs/sidebar.configs';
-import AppSidebar from '@/components/shared/app-sidebar';
 import type { SessionUser } from '@/features/auth/types/auth.types';
+import AppSidebar from '@/components/shared/app-sidebar';
+
+import { SIDEBAR_CONFIGS } from '../_configs/sidebar.configs';
 
 const CashierSidebar = ({ user }: { user: SessionUser }) => {
     /**

@@ -5,6 +5,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
+
 import type { NavItem } from './app-sidebar.types';
 
 const SidebarNav = ({ items }: { items: NavItem[] }) => {

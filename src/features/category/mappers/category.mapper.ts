@@ -1,6 +1,7 @@
 import type { Prisma, Category as PrismaCategory } from '@/generated/prisma';
-import type { Category } from '../types/category.type';
+
 import type { CategoryDto } from '../dtos/category.dto';
+import type { Category } from '../types/category.type';
 import type { CreateCategoryInput } from '../validators/create-category.validator';
 import type { UpdateCategoryInput } from '../validators/update-category.validator';
 

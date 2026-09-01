@@ -1,5 +1,6 @@
+import { fail, ok } from '@/types/result.type';
+
 import { validateCreateCategoryInput } from './create-category.validator';
-import { ok, fail } from '@/types/result.type';
 
 const validInput = {
     name: 'Electronics',

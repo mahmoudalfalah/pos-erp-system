@@ -1,5 +1,6 @@
-import { PrismaClient } from '@/generated/prisma';
 import { mockDeep, type DeepMockProxy } from 'vitest-mock-extended';
+
+import { PrismaClient } from '@/generated/prisma';
 
 export const mockPrisma: DeepMockProxy<PrismaClient> = mockDeep<PrismaClient>();
 

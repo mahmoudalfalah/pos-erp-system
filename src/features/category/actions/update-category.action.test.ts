@@ -1,10 +1,12 @@
 import { revalidatePath } from 'next/cache';
-import { updateCategoryAction } from '../actions/update-category.action';
-import { updateCategory } from '../services/update-category.service';
-import { fail, ok } from '@/types/result.type';
+
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
 import { Role } from '@/features/auth/types/role.types';
+import { fail, ok } from '@/types/result.type';
+
+import { updateCategoryAction } from '../actions/update-category.action';
 import { CategoryMapper } from '../mappers/category.mapper';
+import { updateCategory } from '../services/update-category.service';
 
 vi.mock('next/cache', () => ({
     revalidatePath: vi.fn(),

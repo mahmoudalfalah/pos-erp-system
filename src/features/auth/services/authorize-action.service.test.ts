@@ -1,9 +1,11 @@
-import { authorizeAction } from './authorize-action.service';
-import { Role } from '../types/role.types';
 import type { Session } from 'next-auth';
+
 import type { User } from '@/generated/prisma';
+import { fail, ok } from '@/types/result.type';
 import { mockPrisma } from '@/tests/mocks/db';
-import { ok, fail } from '@/types/result.type';
+
+import { Role } from '../types/role.types';
+import { authorizeAction } from './authorize-action.service';
 
 vi.mock('server-only', () => ({}));
 

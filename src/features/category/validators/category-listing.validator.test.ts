@@ -1,5 +1,6 @@
-import { validateCategoryListingParamsSchema } from './category-listing.validator';
 import { fail, ok } from '@/types/result.type';
+
+import { validateCategoryListingParamsSchema } from './category-listing.validator';
 
 const validInput = {
     search: 'electronics',

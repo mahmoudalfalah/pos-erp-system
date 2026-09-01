@@ -1,8 +1,10 @@
 'use server';
 
-import { signIn } from '@/auth';
-import { credentialsSchema } from '@/validators/auth.validator';
 import { isRedirectError } from 'next/dist/client/components/redirect-error';
+
+import { credentialsSchema } from '@/validators/auth.validator';
+import { signIn } from '@/auth';
+
 import type { LoginActionState } from '../types/auth.types';
 
 export const loginAction = async (
