@@ -8,7 +8,10 @@ export type AuthErrorCode =
 
 // --- Products ---
 export type ProductErrorCode =
-    'PRODUCT_NOT_FOUND' | 'PRODUCT_OUT_OF_STOCK' | 'PRODUCT_INSUFFICIENT_STOCK';
+    | 'PRODUCT_NOT_FOUND'
+    | 'PRODUCT_ALREADY_EXISTS'
+    | 'PRODUCT_OUT_OF_STOCK'
+    | 'PRODUCT_INSUFFICIENT_STOCK';
 
 export type CategoryErrorCode = 'CATEGORY_NOT_FOUND' | 'CATEGORY_ALREADY_EXISTS';
 
