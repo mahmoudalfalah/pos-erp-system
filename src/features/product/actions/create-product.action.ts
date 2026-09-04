@@ -1,3 +1,5 @@
+'use server';
+
 import { Role } from '@/features/auth';
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
 import { fail, ok, Result } from '@/types/result.type';
