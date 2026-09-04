@@ -6,6 +6,8 @@ import { ProductMapper } from '../mappers/product.mapper';
 import type { CreateProductInput } from '../validators/create-product.validator';
 import { createProduct } from './create-product.service';
 
+vi.mock('server-only', () => ({}));
+
 const prismaRawProduct: Product = {
     id: 'macbook-pro-16-id',
     name: 'macbook pro 16',
