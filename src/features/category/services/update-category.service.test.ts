@@ -5,6 +5,8 @@ import { mockPrisma } from '@/tests/mocks/db';
 import { CategoryMapper } from '../mappers/category.mapper';
 import { updateCategory } from './update-category.service';
 
+vi.mock('server-only', () => ({}));
+
 const CATEGORY_ID = '22';
 
 const validInput = {

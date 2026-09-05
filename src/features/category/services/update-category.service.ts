@@ -1,3 +1,5 @@
+import 'server-only';
+
 import { db } from '@/lib/db';
 import { getPrismaUniqueFields, isPrismaRecordNotFound } from '@/utils/prisma-errors.util';
 import { fail, ok, type Result } from '@/types/result.type';
