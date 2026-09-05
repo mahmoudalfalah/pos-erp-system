@@ -3,6 +3,8 @@ import { mockPrisma } from '@/tests/mocks/db';
 
 import { createCategory } from './create-category.service';
 
+vi.mock('server-only', () => ({}));
+
 describe('Category Service: createCategory', () => {
     it('should successfully create a category and return an ok result', async () => {
         const input = {

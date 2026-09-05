@@ -3,6 +3,8 @@ import { mockInteractiveTransaction, mockPrisma } from '@/tests/mocks/db';
 
 import { deleteCategories } from './delete-categories.service';
 
+vi.mock('server-only', () => ({}));
+
 const categoriesIds = [
     'cmshgwq8w0000u0slabj2njs8',
     'cmshgwq8w0002u0slwso2tvoy',
