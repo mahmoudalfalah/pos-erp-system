@@ -21,7 +21,7 @@ const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
             <Toaster richColors position="top-right" />
             <SidebarProvider style={sidebarStyles}>
                 <DashboardSidebar user={session.user} />
-                <SidebarInset>{children}</SidebarInset>
+                <SidebarInset className="p-6">{children}</SidebarInset>
             </SidebarProvider>
         </>
     );
