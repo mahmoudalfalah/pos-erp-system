@@ -1,6 +1,6 @@
 import { Package, type LucideIcon } from 'lucide-react';
 
-import Typography from './typography';
+import { Typography } from './typography';
 
 type EmptyStateProps = {
     title?: string;
