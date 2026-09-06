@@ -35,12 +35,10 @@ const variantMapping: Record<NonNullable<TypographyProps['variant']>, React.Elem
     body2: 'p',
 };
 
-const Typography = ({ variant, as, className, children }: TypographyProps) => {
+export function Typography({ variant, as, className, children }: TypographyProps) {
     const Component: React.ElementType = as ?? variantMapping[variant ?? 'body1'];
 
     return (
         <Component className={cn(typographyVariants({ variant }), className)}>{children}</Component>
     );
-};
-
-export default Typography;
+}
