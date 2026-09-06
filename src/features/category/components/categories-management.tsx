@@ -3,7 +3,7 @@
 import { ConfirmationDialog } from '@/components/shared/confirmation-dialog/confirmation-dialog';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
-import Typography from '@/components/ui/typography';
+import { Typography } from '@/components/ui/typography';
 
 import { useCategoriesManagement } from '../hooks/use-categories-management';
 import { CategoriesGrid } from './categories-grid';
