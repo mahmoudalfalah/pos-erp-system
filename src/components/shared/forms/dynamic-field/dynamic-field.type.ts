@@ -1,11 +1,17 @@
 import type { ElementType, InputHTMLAttributes } from 'react';
-import type { UseFormProps } from 'react-hook-form';
+import type { UseFormRegisterReturn } from 'react-hook-form';
 
-export type DynamicFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type MainFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'maxLength'> & {
     id: string;
     label: string;
     placeholder: string;
     errorMessage?: string;
-    registerProps: UseFormProps;
+    registerProps: UseFormRegisterReturn;
     component: ElementType;
+    required?: boolean;
 };
+
+type CounterProps =
+    { currentLength?: never; maxLength?: number } | { currentLength: number; maxLength: number };
+
+export type DynamicFieldProps = MainFieldProps & CounterProps;
