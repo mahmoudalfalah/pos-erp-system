@@ -15,6 +15,7 @@ export function DynamicField({
     currentLength,
     required,
     component: Component,
+    helperText,
     ...rest
 }: DynamicFieldProps) {
     return (
@@ -36,7 +37,13 @@ export function DynamicField({
                 {...registerProps}
                 {...rest}
             />
-            {errorMessage && <FieldError>{errorMessage}</FieldError>}
+            {errorMessage ? (
+                <FieldError className="text-xs">{errorMessage}</FieldError>
+            ) : helperText ? (
+                <Typography variant="caption" className="text-muted-foreground">
+                    {helperText}
+                </Typography>
+            ) : null}
         </Field>
     );
 }
