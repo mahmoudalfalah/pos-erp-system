@@ -13,6 +13,7 @@ const typographyVariants = cva('', {
             h6: 'text-base font-medium',
             body1: 'text-base leading-7 font-normal',
             body2: 'text-sm leading-6 font-normal',
+            caption: 'text-xs font-normal',
         },
     },
     defaultVariants: { variant: 'body1' },
@@ -33,6 +34,7 @@ const variantMapping: Record<NonNullable<TypographyProps['variant']>, React.Elem
     h6: 'h6',
     body1: 'p',
     body2: 'p',
+    caption: 'span',
 };
 
 export function Typography({ variant, as, className, children }: TypographyProps) {
