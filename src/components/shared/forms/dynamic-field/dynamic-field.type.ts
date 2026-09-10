@@ -10,6 +10,7 @@ type MainFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'maxLength'> &
     component: ElementType;
     required?: boolean;
     helperText?: string;
+    startAdornment?: string;
 };
 
 type CounterProps =
