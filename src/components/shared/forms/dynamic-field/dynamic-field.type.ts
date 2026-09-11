@@ -9,6 +9,8 @@ type MainFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'maxLength'> &
     registerProps: UseFormRegisterReturn;
     component: ElementType;
     required?: boolean;
+    helperText?: string;
+    startAdornment?: string;
 };
 
 type CounterProps =
