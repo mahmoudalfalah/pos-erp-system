@@ -6,7 +6,7 @@ import { Typography } from '@/components/ui/typography';
 
 export function CreateProductHeader({ isSubmitting }: { isSubmitting: boolean }) {
     return (
-        <header className="flex justify-between">
+        <header className="flex justify-between border-b pb-3">
             <div>
                 <Typography as="h1" variant="h3">
                     Create Product
