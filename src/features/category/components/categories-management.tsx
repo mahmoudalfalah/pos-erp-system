@@ -29,7 +29,7 @@ export function CategoriesManagement() {
     );
 
     return (
-        <div className="p-10">
+        <div>
             <CreateCategoryDialog onCreated={refreshCategories} />
             <UpdateCategoryDialog
                 onUpdated={refreshCategories}
