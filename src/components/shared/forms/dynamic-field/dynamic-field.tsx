@@ -32,8 +32,15 @@ export function DynamicField({
     return (
         <Field>
             <div className="flex items-center justify-between">
-                <FieldLabel htmlFor={id}>
-                    {label} {required && <span className="text-red-600">*</span>}
+                <FieldLabel className="items-baseline gap-1" htmlFor={id}>
+                    {label}{' '}
+                    {required ? (
+                        <span className="text-red-600">*</span>
+                    ) : (
+                        <span className="text-2xs font-normal text-muted-foreground">
+                            (Optional)
+                        </span>
+                    )}
                 </FieldLabel>
                 {typeof currentLength === 'number' && (
                     <Typography className="text-sm text-muted-foreground">
