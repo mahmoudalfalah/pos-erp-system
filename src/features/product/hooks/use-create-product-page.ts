@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { createProductAction } from '../actions/create-product.action';
-import { CREATE_PRODUCT_FORM_DEFAULT_VALUES } from '../configs/create-product-form-configs';
+import { CREATE_PRODUCT_FORM_DEFAULT_VALUES } from '../configs/create-product/create-product-defaults.configs';
 import {
     createProductSchema,
     type CreateProductInput,
