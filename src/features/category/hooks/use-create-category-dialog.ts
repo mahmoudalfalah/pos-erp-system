@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { createCategoryAction } from '../actions/create-category.action';
-import { CREATE_CATEGORY_FORM_DEFAULT_VALUES } from '../configs/create-category-form.configs';
+import { CATEGORY_FORM_DEFAULT_VALUES } from '../configs/category-defaults.configs';
 import {
     CreateCategoryInput,
     createCategorySchema,
@@ -17,7 +17,7 @@ export const useCreateCategoryDialog = () => {
     const form = useForm<CreateCategoryFormInput, unknown, CreateCategoryInput>({
         resolver: zodResolver(createCategorySchema),
         mode: 'onTouched',
-        defaultValues: CREATE_CATEGORY_FORM_DEFAULT_VALUES,
+        defaultValues: CATEGORY_FORM_DEFAULT_VALUES,
     });
 
     const handleOpenChange = (nextOpen: boolean) => {

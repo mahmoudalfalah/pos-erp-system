@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Switch } from '@/components/ui/switch';
 
-import { CREATE_CATEGORY_REGISTERED_FIELDS } from '../configs/create-category-form.configs';
+import { CATEGORY_REGISTERED_FIELDS } from '../configs/category-fields-ui.configs';
 import { useCreateCategoryDialog } from '../hooks/use-create-category-dialog';
 
 export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
@@ -28,7 +28,7 @@ export function CreateCategoryDialog({ onCreated }: { onCreated: () => void }) {
             onSubmit={form.handleSubmit((data) => onSubmit(data, onCreated))}
         >
             <FieldGroup>
-                {CREATE_CATEGORY_REGISTERED_FIELDS.map((field) => (
+                {CATEGORY_REGISTERED_FIELDS.map((field) => (
                     <DynamicField
                         key={field.id}
                         id={field.name}

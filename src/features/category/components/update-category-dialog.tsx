@@ -7,7 +7,7 @@ import { EntityDialogForm } from '@/components/shared/forms/entity-dialog-form/e
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { Switch } from '@/components/ui/switch';
 
-import { CREATE_CATEGORY_REGISTERED_FIELDS } from '../configs/create-category-form.configs';
+import { CATEGORY_REGISTERED_FIELDS } from '../configs/category-fields-ui.configs';
 import type { CategoryDto } from '../dtos/category.dto';
 import { useUpdateCategoryDialog } from '../hooks/use-update-category-dialog';
 
@@ -39,7 +39,7 @@ export function UpdateCategoryDialog({
             onSubmit={form.handleSubmit((data) => onSubmit(data, onUpdated))}
         >
             <FieldGroup>
-                {CREATE_CATEGORY_REGISTERED_FIELDS.map((field) => (
+                {CATEGORY_REGISTERED_FIELDS.map((field) => (
                     <DynamicField
                         key={field.id}
                         id={field.name}
