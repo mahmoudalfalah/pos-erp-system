@@ -2,9 +2,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 import type { CreateCategoryRegisteredField } from '../types/create-category.type';
-import type { CreateCategoryInput } from '../validators/create-category.validator';
 
-export const CREATE_CATEGORY_REGISTERED_FIELDS: CreateCategoryRegisteredField[] = [
+export const CATEGORY_REGISTERED_FIELDS: CreateCategoryRegisteredField[] = [
     {
         id: 'name',
         name: 'name',
@@ -27,10 +26,3 @@ export const CREATE_CATEGORY_REGISTERED_FIELDS: CreateCategoryRegisteredField[] 
         kind: Textarea,
     },
 ];
-
-export const CREATE_CATEGORY_FORM_DEFAULT_VALUES: CreateCategoryInput = {
-    name: '',
-    slug: '',
-    description: '',
-    isActive: true,
-};

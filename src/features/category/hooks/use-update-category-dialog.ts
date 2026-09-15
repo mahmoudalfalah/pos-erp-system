@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { updateCategoryAction } from '../actions/update-category.action';
-import { CREATE_CATEGORY_FORM_DEFAULT_VALUES } from '../configs/create-category-form.configs';
+import { CATEGORY_FORM_DEFAULT_VALUES } from '../configs/category-defaults.configs';
 import type { CategoryDto } from '../dtos/category.dto';
 import {
     updateCategorySchema,
@@ -20,7 +20,7 @@ export function useUpdateCategoryDialog(
     const form = useForm<UpdateCategoryFormInput, unknown, UpdateCategoryInput>({
         resolver: zodResolver(updateCategorySchema),
         mode: 'onTouched',
-        values: categoryToUpdate ?? CREATE_CATEGORY_FORM_DEFAULT_VALUES,
+        values: categoryToUpdate ?? CATEGORY_FORM_DEFAULT_VALUES,
     });
 
     const handleCloseUpdate = () => {
