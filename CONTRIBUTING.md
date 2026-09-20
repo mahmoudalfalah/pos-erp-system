@@ -10,6 +10,7 @@ Branches must follow this format:
 
 - **With a linked issue:** `type/issueNumber-simple-description` (e.g., `feat/23-category-validation`)
 - **Without a linked issue:** `type/simple-description` (e.g., `hotfix/fix-auth-crash`)
+- **GitHub GUI Reverts:** `revert-[pr-number]-[original-branch]` (e.g., `revert-187-test/186-zod-to-json`) — _automatically generated and permitted by CI when using the GitHub interface._
 
 ### Allowed Branch Type Prefixes
 

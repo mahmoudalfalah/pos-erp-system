@@ -13,9 +13,13 @@ jobs:
             - name: Validate branch name
               run: |
                   BRANCH="${{ github.ref_name }}"
-                  PATTERN="^(feat|fix|hotfix|build|chore|refactor|ci|docs|test|perf|revert)(\/[0-9]+-[a-z0-9-]+|\/[a-z0-9-]+)$"
-                  if [[ ! "$BRANCH" =~ $PATTERN ]]; then
-                    echo "Branch name '$BRANCH' does not follow convention. Expected: type/123-simple-description or type/simple-description"
+                  STANDARD_PATTERN="^(feat|fix|hotfix|build|chore|refactor|ci|docs|test|perf|revert)(\/[0-9]+-[a-z0-9-]+|\/[a-z0-9-]+)$"
+                  GITHUB_REVERT_PATTERN="^revert-[0-9]+-.+$"
+
+                  if [[ ! "$BRANCH" =~ $STANDARD_PATTERN && ! "$BRANCH" =~ $GITHUB_REVERT_PATTERN ]]; then
+                    echo "Error: Branch name '$BRANCH' does not follow convention."
+                    echo "Expected standard format: type/123-simple-description or type/simple-description"
+                    echo "Expected GitHub revert format: revert-<pr-number>-<original-branch-name>"
                     exit 1
                   fi
 
