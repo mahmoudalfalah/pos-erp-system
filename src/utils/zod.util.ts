@@ -14,6 +14,7 @@ export function getBaseSchema(schema: z.core.$ZodType): z.core.$ZodType {
     ) {
         return getBaseSchema(schema.unwrap());
     }
+
     return schema;
 }
 
@@ -34,16 +35,23 @@ export function isFieldRequired(schema: z.core.$ZodType): boolean {
 }
 
 type FieldConstraints = Partial<{
-    maxLength: string;
+    maxLength: number;
 }>;
 
-export function getFieldConstraints(schema: z.core.$ZodType) {
+export function getFieldConstraints(schema: z.core.$ZodType): FieldConstraints {
+    if (schema instanceof z.ZodPipe) {
+        return {
+            ...getFieldConstraints(schema.in),
+            ...getFieldConstraints(schema.out),
+        };
+    }
+
     const baseSchema = getBaseSchema(schema);
     const constraints: FieldConstraints = {};
 
     if (baseSchema instanceof z.ZodString) {
         if (baseSchema.maxLength) {
-            constraints.maxLength = baseSchema.maxLength.toString();
+            constraints.maxLength = baseSchema.maxLength;
         }
     }
 

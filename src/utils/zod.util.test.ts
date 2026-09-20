@@ -70,7 +70,18 @@ describe('Zod Util', () => {
             expect(getFieldConstraints(z.string())).toStrictEqual({});
         });
         it('should return the maxLength constraint for a string', () => {
-            expect(getFieldConstraints(z.string().max(100))).toStrictEqual({ maxLength: '100' });
+            expect(getFieldConstraints(z.string().max(100)).maxLength).toBe(100);
+        });
+        it('should extract constraints from the output side of a pipeline', () => {
+            const pipeSchema = z.string().pipe(z.string().max(100));
+            expect(getFieldConstraints(pipeSchema).maxLength).toBe(100);
+        });
+        it('should merge constraints across deep pipelines where the rightmost constraint takes precedence', () => {
+            const pipeSchmea = z
+                .string()
+                .max(100)
+                .pipe(z.string().max(200).pipe(z.string().max(300)));
+            expect(getFieldConstraints(pipeSchmea).maxLength).toBe(300);
         });
     });
 });
