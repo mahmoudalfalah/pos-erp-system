@@ -50,7 +50,7 @@ export function DynamicField({
             </div>
             <div
                 className={cn(
-                    'flex h-8 w-full min-w-0 items-baseline overflow-hidden rounded-lg border border-input',
+                    'flex w-full min-w-0 items-baseline overflow-hidden rounded-lg border border-input',
                     'bg-transparent text-base transition-colors outline-none',
                     'file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
                     'placeholder:text-muted-foreground',
