@@ -25,6 +25,7 @@ Branches must follow this format:
 | `docs`     | Documentation only                          |
 | `test`     | Test additions or corrections               |
 | `perf`     | Performance improvements                    |
+| `revert`   | Undo previous changes                       |
 
 > **Enforced by CI** — branches not matching this convention will be rejected.
 
@@ -52,6 +53,7 @@ type(scope): description
 | `docs`     | Documentation only                          |
 | `test`     | Test additions or corrections               |
 | `perf`     | Performance improvements                    |
+| `revert`   | Undo previous changes                       |
 
 > **Enforced by CI** — commits not matching this convention will be rejected.
 
