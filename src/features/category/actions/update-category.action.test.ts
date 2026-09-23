@@ -7,6 +7,17 @@ import { fail, ok } from '@/types/result.type';
 import { updateCategoryAction } from '../actions/update-category.action';
 import { CategoryMapper } from '../mappers/category.mapper';
 import { updateCategory } from '../services/update-category.service';
+import { Category } from '../types/category.type';
+import {
+    UpdateCategoryInput,
+    validateUpdateCategoryInput,
+} from '../validators/update-category.validator';
+
+vi.mock('../validators/update-category.validator', () => ({
+    validateUpdateCategoryInput: vi.fn(),
+}));
+
+const mockValidateUpdateCategoryInput = vi.mocked(validateUpdateCategoryInput);
 
 vi.mock('next/cache', () => ({
     revalidatePath: vi.fn(),
@@ -35,98 +46,109 @@ const authorizedUser = {
 
 const CATEGORY_ID = '22';
 
-const validInput = {
-    name: 'Furniture',
-    slug: 'furniture',
-    description: 'All kinds of furniture',
+const now = new Date();
+
+const updateCategoryInput: UpdateCategoryInput = {
+    name: 'Electronics',
+    slug: 'electronics',
+    description: 'All kinds of electronic items',
     isActive: true,
 };
 
-const mockCategory = {
+const domainCategory: Category = {
     id: 'electronics-id',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    ...validInput,
+    name: 'Electronics',
+    slug: 'electronics',
+    description: 'All kinds of electronic items',
+    isActive: true,
+    createdAt: now,
+    updatedAt: now,
 };
 
 describe('updateCategoryAction', () => {
     beforeEach(() => {
-        mockRevalidatePath.mockReset();
-        mockAuthorizeAction.mockReset();
-        mockUpdateCategory.mockReset();
+        vi.clearAllMocks();
     });
 
-    it('returns a success result for valid input data', async () => {
+    it('should update a category with valid input and return the DTO', async () => {
         mockAuthorizeAction.mockResolvedValueOnce(ok(authorizedUser));
-        mockUpdateCategory.mockResolvedValueOnce(ok(mockCategory));
+        mockValidateUpdateCategoryInput.mockReturnValueOnce(ok(updateCategoryInput));
+        mockUpdateCategory.mockResolvedValueOnce(ok(domainCategory));
 
-        const result = await updateCategoryAction(CATEGORY_ID, validInput);
+        const result = await updateCategoryAction(CATEGORY_ID, updateCategoryInput);
 
-        expect(result).toStrictEqual(ok(CategoryMapper.toDto(mockCategory)));
+        expect(result).toStrictEqual(ok(CategoryMapper.toDto(domainCategory)));
+
         expect(mockRevalidatePath).toHaveBeenCalledWith('/dashboard/categories');
-        expect(mockAuthorizeAction).toHaveBeenCalledOnce();
+        expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
+        expect(mockValidateUpdateCategoryInput).toHaveBeenCalledWith(updateCategoryInput);
         expect(mockUpdateCategory).toHaveBeenCalledOnce();
     });
 
-    it('propagates an authorization failure without calling the service', async () => {
-        const unauthorizedFailure = fail({
+    it('should propogate authorization error if the user is not authorized', async () => {
+        const authorizationFailure = fail({
             code: 'AUTH_FORBIDDEN',
             message: 'User does not have permission to perform this action.',
         });
-        mockAuthorizeAction.mockResolvedValueOnce(unauthorizedFailure);
 
-        const result = await updateCategoryAction(CATEGORY_ID, validInput);
+        mockAuthorizeAction.mockResolvedValueOnce(authorizationFailure);
 
-        expect(result).toEqual(unauthorizedFailure);
+        const result = await updateCategoryAction(CATEGORY_ID, updateCategoryInput);
+
+        expect(result).toStrictEqual(authorizationFailure);
+
         expect(mockRevalidatePath).not.toHaveBeenCalled();
         expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
         expect(mockUpdateCategory).not.toHaveBeenCalled();
+        expect(mockValidateUpdateCategoryInput).not.toHaveBeenCalled();
     });
 
-    it('returns a validation error for invalid input data', async () => {
+    it('should propogate validation errors if input is invalid', async () => {
         mockAuthorizeAction.mockResolvedValueOnce(ok(authorizedUser));
-        const invalidInput = {
-            ...validInput,
-            name: '',
-        };
 
-        const result = await updateCategoryAction(CATEGORY_ID, invalidInput);
-
-        expect(result).toEqual(
-            fail(
-                expect.objectContaining({
-                    code: 'VALIDATION',
-                    message: 'Invalid input data',
-                }),
-            ),
-        );
-        expect(mockRevalidatePath).not.toHaveBeenCalled();
-        expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
-        expect(mockUpdateCategory).not.toHaveBeenCalled();
-    });
-    it('propagates a service failure', async () => {
-        const updateCategoryFailure = fail({
-            code: 'CATEGORY_ALREADY_EXISTS',
-            message: 'A category with the same unique fields already exists.',
+        const validationFailure = fail({
+            code: 'VALIDATION',
+            message: 'Invalid input data',
             fields: {
-                name: [`Category with name "${validInput.name}" already exists.`],
+                slug: ['missing slug'],
             },
         });
-        mockAuthorizeAction.mockResolvedValueOnce(ok(authorizedUser));
-        mockUpdateCategory.mockResolvedValueOnce(updateCategoryFailure);
 
-        const result = await updateCategoryAction(CATEGORY_ID, validInput);
-        expect(result).toStrictEqual(updateCategoryFailure);
+        mockValidateUpdateCategoryInput.mockReturnValueOnce(validationFailure);
+
+        const result = await updateCategoryAction(CATEGORY_ID, updateCategoryInput);
+
+        expect(result).toStrictEqual(validationFailure);
 
         expect(mockRevalidatePath).not.toHaveBeenCalled();
         expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
-        expect(mockUpdateCategory).toHaveBeenCalledWith(CATEGORY_ID, validInput);
+        expect(mockUpdateCategory).not.toHaveBeenCalled();
     });
-    it('handles unexpected errors gracefully', async () => {
+    it('should propogate service errors', async () => {
         mockAuthorizeAction.mockResolvedValueOnce(ok(authorizedUser));
-        mockUpdateCategory.mockRejectedValueOnce(new Error('Database connection lost'));
+        mockValidateUpdateCategoryInput.mockReturnValueOnce(ok(updateCategoryInput));
 
-        const result = await updateCategoryAction(CATEGORY_ID, validInput);
+        const serviceError = fail({
+            code: 'CATEGORY_ALREADY_EXISTS',
+            message: 'Category already exists',
+        });
+
+        mockUpdateCategory.mockResolvedValueOnce(serviceError);
+
+        const result = await updateCategoryAction(CATEGORY_ID, updateCategoryInput);
+        expect(result).toStrictEqual(serviceError);
+        expect(mockRevalidatePath).not.toHaveBeenCalled();
+        expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
+        expect(mockUpdateCategory).toHaveBeenCalledWith(CATEGORY_ID, updateCategoryInput);
+        expect(mockValidateUpdateCategoryInput).toHaveBeenCalledWith(updateCategoryInput);
+    });
+    it('should return an UNEXPECTED failure if something goes wrong', async () => {
+        mockAuthorizeAction.mockResolvedValueOnce(ok(authorizedUser));
+        mockValidateUpdateCategoryInput.mockReturnValueOnce(ok(updateCategoryInput));
+
+        mockUpdateCategory.mockRejectedValueOnce(new Error('Something went wrong'));
+
+        const result = await updateCategoryAction(CATEGORY_ID, updateCategoryInput);
 
         expect(result).toStrictEqual(
             fail({
