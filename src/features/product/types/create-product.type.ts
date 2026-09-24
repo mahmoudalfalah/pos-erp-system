@@ -3,12 +3,16 @@ import type { Textarea } from '@/components/ui/textarea';
 
 import type { CreateProductInput } from '../validators/create-product.validator';
 
-export type GeneralInformationRegisteredField = Readonly<{
+type ProductRegistryFields<TKey extends keyof CreateProductInput> = Readonly<{
     id: string;
-    name: Extract<keyof CreateProductInput, 'name' | 'slug' | 'description'>;
+    name: TKey;
     label: string;
     placeholder: string;
     kind: typeof Input | typeof Textarea;
     helperText: string;
     startAdornment?: string;
 }>;
+
+export type GeneralInformationRegisteredField = ProductRegistryFields<
+    'name' | 'slug' | 'description'
+>;
