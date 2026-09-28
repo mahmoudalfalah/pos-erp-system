@@ -3,7 +3,7 @@
  * import('prettier-plugin-tailwindcss').PluginOptions &
  * import('@ianvs/prettier-plugin-sort-imports').PluginConfig}
  */
-export default {
+const config = {
     semi: true,
     trailingComma: 'all',
     singleQuote: true,
@@ -40,3 +40,5 @@ export default {
     tailwindStylesheet: './src/app/globals.css',
     tailwindFunctions: ['clsx', 'cva', 'cn'],
 };
+
+export default config;
