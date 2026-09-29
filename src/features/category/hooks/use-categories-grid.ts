@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import type { GridApi } from 'ag-grid-community';
 
@@ -22,9 +22,12 @@ export function useCategoriesGrid(
     const pageSize = PAGE_SIZE_OPTIONS.includes(rawPerPage) ? rawPerPage : 10;
     const lastAppliedPagination = useRef({ page, pageSize });
 
-    const onEdit = (data: CategoryDto) => {
-        handleSelectForUpdate(data);
-    };
+    const onEdit = useCallback(
+        (data: CategoryDto) => {
+            handleSelectForUpdate(data);
+        },
+        [handleSelectForUpdate],
+    );
 
     const columnDefs = useMemo(() => getCategoriesListingGridConfigs(onEdit), [onEdit]);
 

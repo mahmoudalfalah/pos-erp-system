@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
 import type { DataGridHandle } from '@/components/shared/data-grid/data-grid.type';
@@ -16,9 +16,9 @@ export function useCategoriesManagement() {
         setRefreshKey((prev) => prev + 1);
     };
 
-    const handleSelectForUpdate = (category: CategoryDto | null) => {
+    const handleSelectForUpdate = useCallback((category: CategoryDto | null) => {
         setCategoryToUpdate(category);
-    };
+    }, []);
 
     const handleDelete = async () => {
         const selectedCategoryIds =
