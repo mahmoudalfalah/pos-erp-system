@@ -21,6 +21,8 @@ export function DynamicField({
     component: Component,
     helperText,
     startAdornment,
+    startAddon: StartAddon,
+    endAddon: EndAddon,
     ...rest
 }: DynamicFieldProps) {
     const inputRef = useRef<HTMLInputElement>(null);
@@ -66,19 +68,38 @@ export function DynamicField({
                 aria-invalid={!!errorMessage}
             >
                 {startAdornment && <div className="px-2.5 py-1">{startAdornment}</div>}
-                <Component
-                    id={id}
-                    placeholder={placeholder}
-                    maxLength={maxLength}
-                    className={cn(
-                        'flex-1 rounded-none border-0 bg-background shadow-none ring-0 outline-none dark:bg-background',
-                        'focus-visible:ring-0 focus-visible:ring-offset-0',
-                        'disabled:cursor-not-allowed disabled:opacity-50',
-                    )}
-                    ref={mergedRefs}
-                    {...restRegisterProps}
-                    {...rest}
-                />
+                <div className={cn('flex items-center', 'flex-1 bg-background dark:bg-background')}>
+                    {StartAddon &&
+                        (typeof StartAddon == 'string' ? (
+                            <Typography variant="caption" className="px-2.5 py-1">
+                                {StartAddon}
+                            </Typography>
+                        ) : (
+                            <StartAddon size={16} className="mx-2.5 my-1" />
+                        ))}
+                    <Component
+                        id={id}
+                        placeholder={placeholder}
+                        maxLength={maxLength}
+                        className={cn(
+                            'flex-1 rounded-none border-0 bg-background shadow-none ring-0 outline-none dark:bg-background',
+                            'focus-visible:ring-0 focus-visible:ring-offset-0',
+                            'disabled:cursor-not-allowed disabled:opacity-50',
+                            StartAddon && 'px-0',
+                        )}
+                        ref={mergedRefs}
+                        {...restRegisterProps}
+                        {...rest}
+                    />
+                    {EndAddon &&
+                        (typeof EndAddon == 'string' ? (
+                            <Typography variant="caption" className="px-2.5 py-1">
+                                {EndAddon}
+                            </Typography>
+                        ) : (
+                            <EndAddon size={16} className="mx-2.5 my-1" />
+                        ))}
+                </div>
             </div>
             {errorMessage ? (
                 <FieldError className="text-xs">{errorMessage}</FieldError>

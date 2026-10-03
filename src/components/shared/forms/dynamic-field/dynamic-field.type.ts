@@ -1,4 +1,5 @@
 import type { ElementType, InputHTMLAttributes } from 'react';
+import type { LucideIcon } from 'lucide-react';
 import type { UseFormRegisterReturn } from 'react-hook-form';
 
 type MainFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'maxLength'> & {
@@ -11,6 +12,8 @@ type MainFieldProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'maxLength'> &
     required?: boolean;
     helperText?: string;
     startAdornment?: string;
+    startAddon?: string | LucideIcon;
+    endAddon?: string | LucideIcon;
 };
 
 type CounterProps =
