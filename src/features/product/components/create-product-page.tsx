@@ -2,6 +2,7 @@
 
 import { useCreateProductPage } from '../hooks/use-create-product-page';
 import { CreateProductHeader } from './create-page/create-product-header';
+import { FinanceCard } from './create-page/finance-card';
 import { GeneralInformationCard } from './create-page/general-information-card';
 
 export function CreateProductPage() {
@@ -15,6 +16,7 @@ export function CreateProductPage() {
                     errors={form.formState.errors}
                     control={form.control}
                 />
+                <FinanceCard register={form.register} errors={form.formState.errors} />
             </main>
         </form>
     );
