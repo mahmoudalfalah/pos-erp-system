@@ -1,3 +1,5 @@
+import type { LucideIcon } from 'lucide-react';
+
 import type { Input } from '@/components/ui/input';
 import type { Textarea } from '@/components/ui/textarea';
 
@@ -11,8 +13,12 @@ type ProductRegistryFields<TKey extends keyof CreateProductInput> = Readonly<{
     kind: typeof Input | typeof Textarea;
     helperText: string;
     startAdornment?: string;
+    startAddon?: string | LucideIcon;
+    endAddon?: string | LucideIcon;
 }>;
 
 export type GeneralInformationRegisteredField = ProductRegistryFields<
     'name' | 'slug' | 'description'
 >;
+
+export type FinanceRegisteredField = ProductRegistryFields<'currentPrice' | 'currentCost'>;

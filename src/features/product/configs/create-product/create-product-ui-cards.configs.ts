@@ -1,7 +1,10 @@
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
-import type { GeneralInformationRegisteredField } from '../../types/create-product.type';
+import type {
+    FinanceRegisteredField,
+    GeneralInformationRegisteredField,
+} from '../../types/create-product.type';
 
 export const GENERAL_INFORMATION_REGISTERED_FIELDS: GeneralInformationRegisteredField[] = [
     {
@@ -28,5 +31,29 @@ export const GENERAL_INFORMATION_REGISTERED_FIELDS: GeneralInformationRegistered
         placeholder: 'Product Description',
         kind: Textarea,
         helperText: 'Up to 500 characters.',
+    },
+];
+
+export const FINANCE_REGISTERED_FIELDS: FinanceRegisteredField[] = [
+    {
+        id: 'currentPrice',
+        name: 'currentPrice',
+        label: 'Current Price',
+        placeholder: 'Current Price',
+        kind: Input,
+        helperText: 'The final selling price.',
+        startAddon: process.env.NEXT_PUBLIC_APP_CURRENCY_SYMBOL,
+        endAddon: process.env.NEXT_PUBLIC_APP_CURRENCY,
+    },
+    {
+        id: 'currentCost',
+        name: 'currentCost',
+        label: 'Current Cost',
+        placeholder: 'Current Cost',
+        kind: Input,
+        helperText:
+            'The internal cost to acquire or produce the item. Used to calculate profit margins.',
+        startAddon: process.env.NEXT_PUBLIC_APP_CURRENCY_SYMBOL,
+        endAddon: process.env.NEXT_PUBLIC_APP_CURRENCY,
     },
 ];
