@@ -9,12 +9,11 @@ import { GENERAL_INFORMATION_REGISTERED_FIELDS } from '../../configs/create-prod
 import type { GeneralInformationRegisteredField } from '../../types/create-product.type';
 import {
     createProductSchema,
-    type CreateProductInput,
     type CreateProductRawInput,
 } from '../../validators/create-product.validator';
 
 type CardFieldNames = GeneralInformationRegisteredField['name'];
-type CardWatchedValues = Pick<CreateProductInput, CardFieldNames>;
+type CardWatchedValues = Pick<CreateProductRawInput, CardFieldNames>;
 
 export function GeneralInformationCard({
     register,
