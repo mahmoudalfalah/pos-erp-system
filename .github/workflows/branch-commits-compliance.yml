@@ -13,7 +13,7 @@ jobs:
             - name: Validate branch name
               run: |
                   BRANCH="${{ github.ref_name }}"
-                  STANDARD_PATTERN="^(feat|fix|hotfix|build|chore|refactor|ci|docs|test|perf|revert)(\/[0-9]+-[a-z0-9-]+|\/[a-z0-9-]+)$"
+                  STANDARD_PATTERN="^(feat|fix|hotfix|build|chore|refactor|ci|style|docs|test|perf|revert)(\/[0-9]+-[a-z0-9-]+|\/[a-z0-9-]+)$"
                   GITHUB_REVERT_PATTERN="^revert-[0-9]+-.+$"
 
                   if [[ ! "$BRANCH" =~ $STANDARD_PATTERN && ! "$BRANCH" =~ $GITHUB_REVERT_PATTERN ]]; then
@@ -34,7 +34,7 @@ jobs:
 
             - name: Validate commit messages
               run: |
-                  PATTERN="^(feat|fix|hotfix|build|chore|refactor|ci|docs|test|perf|revert)(\([a-z0-9-]+\))?: .{1,100}$"
+                  PATTERN="^(feat|fix|hotfix|build|chore|refactor|ci|style|docs|test|perf|revert)(\([a-z0-9-]+\))?: .{1,100}$"
                   COMMITS=$(git log origin/main..HEAD --pretty=format:"%s")
                   if [[ -z "$COMMITS" ]]; then
                     echo "No commits found to validate."
