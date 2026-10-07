@@ -23,6 +23,7 @@ Branches must follow this format:
 | `chore`    | Maintenance, config, tooling                |
 | `refactor` | Code restructuring without behavior change  |
 | `ci`       | CI/CD pipeline changes                      |
+| `style`    | Code style changes (formatting, whitespace) |
 | `docs`     | Documentation only                          |
 | `test`     | Test additions or corrections               |
 | `perf`     | Performance improvements                    |
@@ -51,6 +52,7 @@ type(scope): description
 | `chore`    | Maintenance, config, tooling                |
 | `refactor` | Code restructuring without behavior change  |
 | `ci`       | CI/CD pipeline changes                      |
+| `style`    | Code style changes (formatting, whitespace) |
 | `docs`     | Documentation only                          |
 | `test`     | Test additions or corrections               |
 | `perf`     | Performance improvements                    |
