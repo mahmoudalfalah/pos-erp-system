@@ -7,6 +7,7 @@ export type Product = {
     description: string | null;
     currentPrice: number;
     currentCost: number;
+    currentStock: number;
     isActive: boolean;
     categoryId: string;
     brandId: string | null;
