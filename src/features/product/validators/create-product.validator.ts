@@ -29,6 +29,11 @@ export const createProductSchema = z.object({
     ),
     currentPrice: z.coerce.number().int().positive('Price must be a positive integer'),
     currentCost: z.coerce.number().int().positive('Cost must be a positive integer'),
+    currentStock: z.coerce
+        .number()
+        .int()
+        .nonnegative('Current stock must be 0 or greater')
+        .default(0),
     isActive: z.boolean().default(true),
     categoryId: z.string().trim().min(1, 'Category ID is required'),
     brandId: emptyToUndefined,
