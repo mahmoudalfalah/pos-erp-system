@@ -8,6 +8,7 @@ const validInput = {
     sku: 'sku',
     currentPrice: 100,
     currentCost: 100,
+    currentStock: 10,
     categoryId: 'cat_123',
     isActive: true,
 };
@@ -73,6 +74,17 @@ describe('validateCreateProductInput', () => {
                 ...validInput,
                 currentPrice: 100,
                 currentCost: 100,
+            }),
+        );
+    });
+    it('defaults currentStock to 0 when not proivded', () => {
+        const { currentStock: _currentStock, ...rest } = validInput;
+        const result = validateCreateProductInput({ ...rest });
+
+        expect(result).toStrictEqual(
+            ok({
+                ...rest,
+                currentStock: 0,
             }),
         );
     });
