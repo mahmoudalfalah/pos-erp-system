@@ -1,21 +1,36 @@
 # POS & ERP System
 
-A full-stack point-of-sale and inventory management system currently in development.
+A web-based Point of Sale and ERP system for managing sales, inventory, and staff.
 
-## Core Stack
+> **Status: early development.** Not usable yet. Expect breaking changes.
 
-- **Framework:** Next.js 14 (App Router)
-- **Language:** TypeScript
-- **UI:** Shadcn/ui & Tailwind CSS
-- **Database / ORM:** PostgreSQL & Prisma (Setup pending)
+## Stack
+
+Next.js, React, Tailwind CSS, shadcn/ui, PostgreSQL, Prisma, Zod, Vitest, Docker, pnpm
 
 ## Getting Started
 
-Clone the repository and install the dependencies:
+```bash
+# start the database
+docker compose up -d
 
-\`\`\`bash
-npm install
-npm run dev
-\`\`\`
+# install and run
+pnpm install
+pnpm run dev
+```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create a `.env` file with your `DATABASE_URL` first. Run `pnpm prisma migrate dev` to apply the schema.
+
+## Structure
+
+```text
+prisma/               schema and migrations
+src/app/              pages and routes
+src/components/       UI components
+src/lib/              utilities and Prisma client
+docker-compose.yml    database container
+```
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the Git workflow and commit conventions.
