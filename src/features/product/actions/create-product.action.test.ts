@@ -8,6 +8,7 @@ import type { Product } from '../types/product.type';
 import {
     validateCreateProductInput,
     type CreateProductInput,
+    type CreateProductRawInput,
 } from '../validators/create-product.validator';
 import { createProductAction } from './create-product.action';
 
@@ -28,6 +29,20 @@ vi.mock('../services/create-product.service', () => ({
 }));
 
 const mockCreateProduct = vi.mocked(createProduct);
+
+const createProductRawInput: CreateProductRawInput = {
+    name: 'macbook pro 16',
+    slug: 'macbook-pro-16',
+    sku: 'mac16',
+    barcode: '1234567890123',
+    description: 'Macbook pro 16 inch M4',
+    currentPrice: 1699,
+    currentCost: 1399,
+    currentStock: 10,
+    isActive: true,
+    categoryId: 'computers',
+    brandId: 'apple',
+};
 
 const createProductInput: CreateProductInput = {
     name: 'macbook pro 16',
@@ -78,7 +93,7 @@ describe('createProductAction', () => {
         mockValidateCreateProductInput.mockReturnValueOnce(ok(createProductInput));
         mockCreateProduct.mockResolvedValueOnce(ok(domainProduct));
 
-        const result = await createProductAction(createProductInput);
+        const result = await createProductAction(createProductRawInput);
 
         expect(result).toStrictEqual(ok(ProductMapper.toDto(domainProduct)));
 
@@ -93,7 +108,7 @@ describe('createProductAction', () => {
         });
 
         mockAuthorizeAction.mockResolvedValueOnce(authorizationFailure);
-        const result = await createProductAction(createProductInput);
+        const result = await createProductAction(createProductRawInput);
         expect(result).toStrictEqual(authorizationFailure);
         expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
         expect(mockCreateProduct).not.toHaveBeenCalled();
@@ -109,7 +124,7 @@ describe('createProductAction', () => {
             },
         });
         mockValidateCreateProductInput.mockReturnValueOnce(validationFailure);
-        const result = await createProductAction(createProductInput);
+        const result = await createProductAction(createProductRawInput);
         expect(result).toStrictEqual(validationFailure);
         expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
         expect(mockCreateProduct).not.toHaveBeenCalled();
@@ -123,7 +138,7 @@ describe('createProductAction', () => {
             message: 'Product already exists',
         });
         mockCreateProduct.mockResolvedValueOnce(serviceFailure);
-        const result = await createProductAction(createProductInput);
+        const result = await createProductAction(createProductRawInput);
         expect(result).toStrictEqual(serviceFailure);
 
         expect(mockAuthorizeAction).toHaveBeenCalledWith(AUTHORIZED_ROLES);
@@ -134,7 +149,7 @@ describe('createProductAction', () => {
         mockAuthorizeAction.mockResolvedValueOnce(ok(authorizedUser));
         mockValidateCreateProductInput.mockReturnValueOnce(ok(createProductInput));
         mockCreateProduct.mockRejectedValueOnce(new Error('Something went wrong'));
-        const result = await createProductAction(createProductInput);
+        const result = await createProductAction(createProductRawInput);
         expect(result).toStrictEqual(
             fail({
                 code: 'UNEXPECTED',

@@ -9,10 +9,12 @@ import { ProductMapper } from '../mappers/product.mapper';
 import { createProduct } from '../services/create-product.service';
 import {
     validateCreateProductInput,
-    type CreateProductInput,
+    type CreateProductRawInput,
 } from '../validators/create-product.validator';
 
-export async function createProductAction(input: CreateProductInput): Promise<Result<ProductDto>> {
+export async function createProductAction(
+    input: CreateProductRawInput,
+): Promise<Result<ProductDto>> {
     const isAuthorized = await authorizeAction([Role.ADMIN, Role.MANAGER]);
 
     if (!isAuthorized.success) {
