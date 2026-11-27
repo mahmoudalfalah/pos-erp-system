@@ -3,14 +3,17 @@ import 'server-only';
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
 import { Role } from '@/features/auth/types/role.types';
 import { db } from '@/lib/db';
+import type { PaginatedResult } from '@/types/pagination.type';
 import { fail, ok, type Result } from '@/types/result.type';
 
+import type { CategoryDto } from '../dtos/category.dto';
 import { CategoryMapper } from '../mappers/category.mapper';
 import { buildCategoryListingQuery } from '../query-builder/category-listing.builder';
-import type { CategoryListingResult } from '../types/category-listing.type';
 import { validateCategoryListingParamsSchema } from '../validators/category-listing.validator';
 
-export async function listCategories(params: unknown): Promise<Result<CategoryListingResult>> {
+export async function listCategories(
+    params: unknown,
+): Promise<Result<PaginatedResult<CategoryDto>>> {
     try {
         const isAuthorized = await authorizeAction([Role.ADMIN, Role.MANAGER]);
 
@@ -30,7 +33,7 @@ export async function listCategories(params: unknown): Promise<Result<CategoryLi
                 where: query.where,
             }),
         ]);
-        const resultObject: CategoryListingResult = {
+        const resultObject: PaginatedResult<CategoryDto> = {
             items: categories.map((category) => CategoryMapper.toDto(category)),
             page: parsedParams.data.page,
             perPage: parsedParams.data.perPage,
