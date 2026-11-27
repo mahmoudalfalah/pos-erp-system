@@ -1,11 +1,12 @@
 import type { Category } from '@/generated/prisma';
 import { Role } from '@/features/auth';
 import { authorizeAction } from '@/features/auth/services/authorize-action.service';
+import { PaginatedResult } from '@/types/pagination.type';
 import { fail, ok } from '@/types/result.type';
 import { mockPrisma } from '@/tests/mocks/db';
 
+import type { CategoryDto } from '../dtos/category.dto';
 import { CategoryMapper } from '../mappers/category.mapper';
-import type { CategoryListingResult } from '../types/category-listing.type';
 import type { CategoryListingRawParams } from '../validators/category-listing.validator';
 import { listCategories } from './category-listing.query';
 
@@ -91,7 +92,7 @@ describe('listCategories', () => {
             perPage: '10',
         });
 
-        const expectedResult: CategoryListingResult = {
+        const expectedResult: PaginatedResult<CategoryDto> = {
             items: [CategoryMapper.toDto(categoryRecord)],
             page: 3,
             perPage: 10,
